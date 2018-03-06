@@ -5,6 +5,7 @@
  */
 package Presentacion;
 
+import Logica.Fec;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -36,7 +37,7 @@ public class Formulario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         cmbElementosDeMemoria = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        sltSalidas = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
@@ -51,6 +52,7 @@ public class Formulario extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jComboBox6 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         JDialogTablaVerdad.setMinimumSize(new java.awt.Dimension(600, 400));
 
@@ -91,10 +93,15 @@ public class Formulario extends javax.swing.JFrame {
         jLabel2.setText("Ingrese cantidad de elementos de memoria:");
 
         cmbElementosDeMemoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        cmbElementosDeMemoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbElementosDeMemoriaActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Digite cantidad de salidas:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        sltSalidas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
 
         jLabel4.setText("Describa las ecuaciones de las salidas:");
 
@@ -139,6 +146,13 @@ public class Formulario extends javax.swing.JFrame {
 
         jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3", "Niguna" }));
 
+        jButton1.setText("Generar Tabla de Verdad");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,6 +164,7 @@ public class Formulario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
                     .addComponent(jLabel9)
                     .addComponent(jLabel8)
                     .addComponent(jLabel4)
@@ -163,7 +178,7 @@ public class Formulario extends javax.swing.JFrame {
                                         .addComponent(jLabel3))
                                     .addGap(45, 45, 45)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(sltSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(cmbElementosDeMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jLabel7))
                         .addGap(42, 42, 42)
@@ -198,7 +213,7 @@ public class Formulario extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sltSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
@@ -213,7 +228,9 @@ public class Formulario extends javax.swing.JFrame {
                     .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
-                .addGap(37, 37, 37)
+                .addGap(8, 8, 8)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -232,10 +249,7 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        // TODO add your handling code here:
-        
-       
-        
+
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnCodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodificarActionPerformed
@@ -476,6 +490,53 @@ public class Formulario extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCodificarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Fec oFec = new Fec(Integer.parseInt(this.cmbElementosDeMemoria.getSelectedItem().toString()), Integer.parseInt(this.sltSalidas.getSelectedItem().toString()));
+        int[][] iTabla = oFec.getTablaVerdad();
+        int iAux = Integer.parseInt(this.cmbElementosDeMemoria.getSelectedItem().toString());
+        this.JDialogTablaVerdad.show();
+        DefaultTableModel modelo=new DefaultTableModel(); 
+        this.tableTVerdad.setModel(modelo);
+        // For para imprimir la matriz de prueba
+        int iAux2 = 0;
+        for (int i = 0; i < iTabla[0].length; i++) {
+            if (i == 0) {
+                modelo.addColumn("E");
+            } else if (i < (iAux + 1)){
+                if (i == 1) {
+                    iAux2 = 1;
+                }
+                modelo.addColumn("D" + iAux2);
+                iAux2++;
+            } else if (i >= (iAux + 1) && i < ((iAux * 2) + 1)) {
+                if (i == (iAux + 1)) {
+                    iAux2 = 1;
+                }
+                modelo.addColumn("D" + iAux2);
+                iAux2++;
+            } else {
+                if (i == ((iAux * 2) + 1)) {
+                    iAux2 = 1;
+                }
+                modelo.addColumn("S" + iAux2);
+                iAux2++;
+            }
+        }
+        for (int i = 0; i < iTabla.length; i++) {
+            Object[] fila = new Object[iTabla[i].length];
+            for (int j = 0; j < iTabla[i].length; j++) {
+                    fila[j] = iTabla[i][j];
+                    System.out.print("|" + iTabla[i][j] + "|");
+            }
+            System.out.println("");
+            modelo.addRow(fila);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cmbElementosDeMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbElementosDeMemoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbElementosDeMemoriaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -516,7 +577,7 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JButton btnCodificar;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JComboBox<String> cmbElementosDeMemoria;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
@@ -533,6 +594,8 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> sltSalidas;
     private javax.swing.JTable tableTVerdad;
     // End of variables declaration//GEN-END:variables
+
 }
