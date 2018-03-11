@@ -201,7 +201,6 @@ public class Fec {
     
     public String getCodificar(String sEntrada) {
         String sText = "";
-        sEntrada = "010101101";
         //creo un array char con el string anterior
         char cadChar[] = sEntrada.toCharArray();
         //inicializo varibles a utilizar en el ciclo
