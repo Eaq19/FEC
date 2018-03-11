@@ -19,6 +19,7 @@ public class Fec {
     private int iXOR = 0;
     private int iEstados = 0;
     private String[] aEcuacion = null;
+    private int[][] aEstados = null;
 
     public Fec(int iElement, int iSalidas, int iXOR, String[] aEcuacion) {
         //Variables inicializadas
@@ -61,7 +62,7 @@ public class Fec {
                         iAuxFinal[j - (this.iElement + 1)] = iQInicial[j - (this.iElement + 2)];
                     }
                 } else {
-                    iTabla[i][j] = this.getSalida(iAuxSalidas, iTabla, i);
+                    iTabla[i][j] = this.getSalida(iAuxSalidas, iTabla, i, iAux);
                     iAuxSalidas++;
                 }
             }
@@ -75,28 +76,41 @@ public class Fec {
             iTabla[i][0] = iAux;
             iAux++;
         }
+        this.getCrearEstados(iQFinal);
         return iTabla;
     }
     
-    public int getSalida(int iAuxSalidas, int[][] iTabla, int iRow) {
+    public void getCrearEstados(int[][] iQFinal) {
+        int[][] aAux = new int[this.iEstados][this.iElement];
+        this.aEstados = new int[this.iEstados][this.iElement];
+        int[] iValor = new int[this.iEstados];
+        for (int i = 0; i < this.aEstados.length; i++) {
+            for (int j = 0; j < this.aEstados[i].length; j++) {
+                this.aEstados[i][j] = iQFinal[i][j];
+            }
+        }
+    }
+    
+    public int[][] getEstados() {
+        return this.aEstados;
+    }
+    
+    public int getSalida(int iAuxSalidas, int[][] iTabla, int iRow, int iEntrada) {
         int iValor = 0;
         String[] sPartes = this.aEcuacion[iAuxSalidas].split(" XOR ");
         if (sPartes.length == 1) {
-            iValor = this.getValorElemento(sPartes[0], iTabla, iRow);
+            iValor = this.getValorElemento(sPartes[0], iTabla, iRow, iEntrada);
         } else{
             int iAnterior = -1;
             int iAux = 0;
             for (int i = 1; i < sPartes.length; i++) {
                 if (iAnterior == -1) {
-                    iAnterior = this.getValorElemento(sPartes[i - 1], iTabla, iRow);
+                    iAnterior = this.getValorElemento(sPartes[i - 1], iTabla, iRow, iEntrada);
                 }
-                System.out.println("Anterior " + iAnterior);
-                System.out.println("Actual " + this.getValorElemento(sPartes[i], iTabla, iRow));
-                iAux = this.getXOR(iAnterior, this.getValorElemento(sPartes[i], iTabla, iRow));
+                iAux = this.getXOR(iAnterior, this.getValorElemento(sPartes[i], iTabla, iRow, iEntrada));
                 iAnterior = iAux;
             }
             iValor = iAnterior;
-            System.out.println("Resultado " + iValor);
         }
         return iValor;
     }
@@ -109,10 +123,10 @@ public class Fec {
         return iValor;
     }
     
-    public int getValorElemento(String sElemento, int[][] iTabla, int iRow) {
+    public int getValorElemento(String sElemento, int[][] iTabla, int iRow, int iEntrada) {
         int iValor = 0;
         if (sElemento.equals("E")) {
-            iValor = iTabla[iRow][0];
+            iValor = iEntrada;
         } else {
             for (int i = 0; i < this.iElement; i++) {
                 String sText = "D" + (i+1);

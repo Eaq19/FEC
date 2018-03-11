@@ -6,6 +6,7 @@
 package Presentacion;
 
 import Logica.Fec;
+import static java.lang.Math.pow;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +20,7 @@ public class Formulario extends javax.swing.JFrame {
     private int iSalida = 0;
     private int iCantEcuaciones = 0;
     private int[][] iTabla = null;
+    private int[][] iEstados = null;
     private String[] aEcuacion = null;
 
     /**
@@ -41,6 +43,9 @@ public class Formulario extends javax.swing.JFrame {
         JDialogTablaVerdad = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTVerdad = new javax.swing.JTable();
+        jDialogEstados = new javax.swing.JDialog();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        tableEstados = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jPanelVariables = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -76,6 +81,7 @@ public class Formulario extends javax.swing.JFrame {
         btnVerTabla = new javax.swing.JButton();
         jError = new javax.swing.JLabel();
         jError1 = new javax.swing.JLabel();
+        btnEstados = new javax.swing.JButton();
 
         JDialogTablaVerdad.setMinimumSize(new java.awt.Dimension(600, 400));
 
@@ -106,6 +112,38 @@ public class Formulario extends javax.swing.JFrame {
             .addGroup(JDialogTablaVerdadLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jDialogEstados.setMinimumSize(new java.awt.Dimension(600, 400));
+
+        tableEstados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane6.setViewportView(tableEstados);
+
+        javax.swing.GroupLayout jDialogEstadosLayout = new javax.swing.GroupLayout(jDialogEstados.getContentPane());
+        jDialogEstados.getContentPane().setLayout(jDialogEstadosLayout);
+        jDialogEstadosLayout.setHorizontalGroup(
+            jDialogEstadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogEstadosLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jDialogEstadosLayout.setVerticalGroup(
+            jDialogEstadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialogEstadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -305,6 +343,13 @@ public class Formulario extends javax.swing.JFrame {
         jError1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jError1.setForeground(new java.awt.Color(204, 0, 0));
 
+        btnEstados.setText("Estados");
+        btnEstados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEstadosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelEcuacionesLayout = new javax.swing.GroupLayout(jPanelEcuaciones);
         jPanelEcuaciones.setLayout(jPanelEcuacionesLayout);
         jPanelEcuacionesLayout.setHorizontalGroup(
@@ -346,7 +391,9 @@ public class Formulario extends javax.swing.JFrame {
                                 .addGroup(jPanelEcuacionesLayout.createSequentialGroup()
                                     .addComponent(btnGenerarTabla)
                                     .addGap(18, 18, 18)
-                                    .addComponent(btnVerTabla))))
+                                    .addComponent(btnVerTabla)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnEstados))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanelEcuacionesLayout.setVerticalGroup(
@@ -375,7 +422,8 @@ public class Formulario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGenerarTabla)
-                    .addComponent(btnVerTabla))
+                    .addComponent(btnVerTabla)
+                    .addComponent(btnEstados))
                 .addContainerGap())
         );
 
@@ -416,12 +464,14 @@ public class Formulario extends javax.swing.JFrame {
     private void fnCrearTabla() {
         Fec oFec = new Fec(this.iElementMemoria, this.iSalida, this.iXOR, this.aEcuacion);
         this.iTabla = oFec.getTablaVerdad();
+        this.iEstados = oFec.getEstados();
     }
 
     private void fnGenerarTabla() {
-        int iAux = iElementMemoria;
-        this.JDialogTablaVerdad.show();
-        DefaultTableModel modelo = new DefaultTableModel();
+        int iAux = this.iElementMemoria;
+        DefaultTableModel modelo = new DefaultTableModel(){
+            public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
+        };
         this.tableTVerdad.setModel(modelo);
         // For para imprimir la matriz de prueba
         int iAux2 = 0;
@@ -432,13 +482,13 @@ public class Formulario extends javax.swing.JFrame {
                 if (i == 1) {
                     iAux2 = 1;
                 }
-                modelo.addColumn("D" + iAux2);
+                modelo.addColumn("D" + iAux2 + "(Actual)");
                 iAux2++;
             } else if (i >= (iAux + 1) && i < ((iAux * 2) + 1)) {
                 if (i == (iAux + 1)) {
                     iAux2 = 1;
                 }
-                modelo.addColumn("D" + iAux2);
+                modelo.addColumn("D" + iAux2 + "(Siguiente)");
                 iAux2++;
             } else {
                 if (i == ((iAux * 2) + 1)) {
@@ -457,6 +507,7 @@ public class Formulario extends javax.swing.JFrame {
             System.out.println("");
             modelo.addRow(fila);
         }
+        this.JDialogTablaVerdad.show();
     }
 
     private void cmbElementosDeMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbElementosDeMemoriaActionPerformed
@@ -471,6 +522,7 @@ public class Formulario extends javax.swing.JFrame {
         this.fnCrearTabla();
         this.btnGenerarTabla.setEnabled(false);
         this.btnVerTabla.setEnabled(true);
+        this.btnEstados.setEnabled(true);
         this.textMensaje.setEnabled(true);
         this.btnCodificar.setEnabled(true);
     }//GEN-LAST:event_btnGenerarTablaActionPerformed
@@ -669,6 +721,7 @@ public class Formulario extends javax.swing.JFrame {
         this.textMensaje.setEnabled(false);
         this.btnCodificar.setEnabled(false);
         this.btnVerTabla.setEnabled(false);
+        this.btnEstados.setEnabled(false);
         this.jLabelNum.setText("Ecuacion #1");
         this.textMensaje.setText("");
         this.textBit.setText("");
@@ -684,6 +737,28 @@ public class Formulario extends javax.swing.JFrame {
 //        String sTexto = this.fnConvertirBitText(sBinario);
 //        System.out.println(sTexto);
     }//GEN-LAST:event_btnCodificarActionPerformed
+
+    private void btnEstadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadosActionPerformed
+        DefaultTableModel modelo = new DefaultTableModel(){
+            public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
+        };
+        this.tableEstados.setModel(modelo);
+        int iEstados = (int) pow(2, this.iElementMemoria);
+        // For para imprimir la matriz de prueba
+        for (int i = 0; i < iEstados; i++) {
+            modelo.addColumn("S°" + i);
+        }
+        Object[] fila = new Object[iEstados];
+        for (int i = 0; i < this.iEstados.length; i++) {
+            String sText = "";
+            for (int j = 0; j < this.iEstados[i].length; j++) {
+                sText += this.iEstados[i][j];
+            }
+            fila[i] = sText;
+        }
+        modelo.addRow(fila);
+        this.jDialogEstados.show();
+    }//GEN-LAST:event_btnEstadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -724,11 +799,13 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JDialog JDialogTablaVerdad;
     private javax.swing.JButton btnCapturar;
     private javax.swing.JButton btnCodificar;
+    private javax.swing.JButton btnEstados;
     private javax.swing.JButton btnGenerarTabla;
     private javax.swing.JButton btnIngresar;
     private javax.swing.JButton btnVerTabla;
     private javax.swing.JComboBox<String> cmbElementosDeMemoria;
     private javax.swing.JButton jButton1;
+    private javax.swing.JDialog jDialogEstados;
     private javax.swing.JLabel jError;
     private javax.swing.JLabel jError1;
     private javax.swing.JLabel jLabel1;
@@ -749,12 +826,14 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JComboBox<String> sltEcuacion1;
     private javax.swing.JComboBox<String> sltEcuacion2;
     private javax.swing.JComboBox<String> sltEcuacion3;
     private javax.swing.JComboBox<String> sltEcuacion4;
     private javax.swing.JComboBox<String> sltSalidas;
     private javax.swing.JComboBox<String> sltXor;
+    private javax.swing.JTable tableEstados;
     private javax.swing.JTable tableTVerdad;
     private javax.swing.JTextArea textBit;
     private javax.swing.JTextArea textCodificado;
