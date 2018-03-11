@@ -19,7 +19,9 @@ public class Fec {
     private int iXOR = 0;
     private int iEstados = 0;
     private String[] aEcuacion = null;
-    private int[][] aEstados = null;
+    private String[] aEstados = null;
+    private String[][] sSalidas = null;
+    private int[][] sEstadoFinal = null;
 
     public Fec(int iElement, int iSalidas, int iXOR, String[] aEcuacion) {
         //Variables inicializadas
@@ -76,22 +78,62 @@ public class Fec {
             iTabla[i][0] = iAux;
             iAux++;
         }
-        this.getCrearEstados(iQFinal);
+        this.getCrearEstados(iQFinal, iTabla);
         return iTabla;
     }
     
-    public void getCrearEstados(int[][] iQFinal) {
-        int[][] aAux = new int[this.iEstados][this.iElement];
-        this.aEstados = new int[this.iEstados][this.iElement];
+    public void getCrearEstados(int[][] iQFinal, int[][] iTabla) {
+        this.aEstados = new String[this.iEstados];
         int[] iValor = new int[this.iEstados];
-        for (int i = 0; i < this.aEstados.length; i++) {
-            for (int j = 0; j < this.aEstados[i].length; j++) {
-                this.aEstados[i][j] = iQFinal[i][j];
+        for (int i = 0; i < this.iEstados; i++) {
+            String sText = "";
+            for (int j = 0; j < iQFinal[i].length; j++) {
+                sText += Integer.toString(iQFinal[i][j]);
+            }
+            this.aEstados[i] =  sText;
+        }
+        this.sEstadoFinal = new int[2][this.iEstados];
+        this.sSalidas = new String[2][this.iEstados];
+        sEstadoFinal = this.getInicializarMatriz(sEstadoFinal);
+        int iAux = 0;
+        for (int i = 0; i < this.iEstados; i++) {
+            for (int k = 0; k < 2; k++) {
+                //Entrada
+                String sAnterior = "";
+                for (int j = 1; j < (this.iElement + 1); j++) {
+                    sAnterior += Integer.toString(iTabla[iAux][j]);
+                }
+                //Siguient
+                String sFinal = "";
+                for (int j = (this.iElement + 1); j < ((this.iElement * 2) + 1); j++) {
+                    sFinal += Integer.toString(iTabla[iAux][j]);
+                }
+                //Siguient
+                String sSalida = "";
+                for (int j = ((this.iElement * 2) + 1); j < iTabla[0].length; j++) {
+                    sSalida += Integer.toString(iTabla[iAux][j]);
+                }
+                int iPosicionAnterior = this.getEstadoSalida(sAnterior);
+                int iPosicionFinal= this.getEstadoSalida(sFinal);
+                this.sEstadoFinal[k][iPosicionAnterior] = iPosicionFinal;
+                this.sSalidas[k][iPosicionAnterior] = sSalida;
+                iAux++;
             }
         }
     }
     
-    public int[][] getEstados() {
+    public int getEstadoSalida(String sText) {
+        int iPosicion = 0;
+        for (int i = 0; i < this.aEstados.length; i++) {
+            if (sText.equals(this.aEstados[i])) {
+                iPosicion = i;
+                break;
+            }
+        }
+        return iPosicion;
+    }
+    
+    public String[] getEstados() {
         return this.aEstados;
     }
     
@@ -153,6 +195,20 @@ public class Fec {
             }
         }
         return iArray;
+    }
+    
+    public String getCodificar(String sEntrada) {
+        String sText = "";
+        sEntrada = "010101101";
+        //creo un array char con el string anterior
+        char cadChar[] = sEntrada.toCharArray();
+        //inicializo varibles a utilizar en el ciclo
+        int iAnterior = 0;
+        for (int i = 0; i < cadChar.length; i++) {
+            sText += this.sSalidas[Integer.parseInt(Character.toString(cadChar[i]))][iAnterior];
+            iAnterior = this.sEstadoFinal[Integer.parseInt(Character.toString(cadChar[i]))][iAnterior];
+        }
+        return sText;
     }
     
 }

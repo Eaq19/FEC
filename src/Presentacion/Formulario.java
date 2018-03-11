@@ -20,8 +20,9 @@ public class Formulario extends javax.swing.JFrame {
     private int iSalida = 0;
     private int iCantEcuaciones = 0;
     private int[][] iTabla = null;
-    private int[][] iEstados = null;
+    private String[] iEstados = null;
     private String[] aEcuacion = null;
+    private Fec oFec = null;
 
     /**
      * Creates new form Formulario
@@ -462,9 +463,9 @@ public class Formulario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void fnCrearTabla() {
-        Fec oFec = new Fec(this.iElementMemoria, this.iSalida, this.iXOR, this.aEcuacion);
-        this.iTabla = oFec.getTablaVerdad();
-        this.iEstados = oFec.getEstados();
+        this.oFec = new Fec(this.iElementMemoria, this.iSalida, this.iXOR, this.aEcuacion);
+        this.iTabla = this.oFec.getTablaVerdad();
+        this.iEstados = this.oFec.getEstados();
     }
 
     private void fnGenerarTabla() {
@@ -734,6 +735,7 @@ public class Formulario extends javax.swing.JFrame {
     private void btnCodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodificarActionPerformed
         String sBinario = this.fnConvertirTextBit(this.textMensaje.getText());
         this.textBit.setText(sBinario);
+        this.textCodificado.setText(this.oFec.getCodificar(sBinario));
 //        String sTexto = this.fnConvertirBitText(sBinario);
 //        System.out.println(sTexto);
     }//GEN-LAST:event_btnCodificarActionPerformed
@@ -750,11 +752,7 @@ public class Formulario extends javax.swing.JFrame {
         }
         Object[] fila = new Object[iEstados];
         for (int i = 0; i < this.iEstados.length; i++) {
-            String sText = "";
-            for (int j = 0; j < this.iEstados[i].length; j++) {
-                sText += this.iEstados[i][j];
-            }
-            fila[i] = sText;
+            fila[i] = this.iEstados[i];
         }
         modelo.addRow(fila);
         this.jDialogEstados.show();
