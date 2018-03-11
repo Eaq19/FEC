@@ -19,11 +19,11 @@ public class Fec {
     private int iXOR = 0;
     private int iEstados = 0;
 
-    public Fec(int iElement, int iSalidas) {
+    public Fec(int iElement, int iSalidas, int iXOR) {
         //Variables inicializadas
         this.iElement = iElement;
         this.iSalidas = iSalidas;
-        this.iXOR = iSalidas;
+        this.iXOR = iXOR;
         this.iEstados = (int) pow(2, iElement);
     }
     

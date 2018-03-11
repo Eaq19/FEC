@@ -14,11 +14,24 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Formulario extends javax.swing.JFrame {
 
+    private int iElementMemoria = 0;
+    private int iXOR = 0;
+    private int iSalida = 0;
+    private int iCantEcuaciones = 1;
+    private int[][] iTabla = null;
+
     /**
      * Creates new form Formulario
      */
     public Formulario() {
         initComponents();
+        this.btnIngresar.setEnabled(false);
+        this.btnGenerarTabla.setEnabled(false);
+        this.textMensaje.setEnabled(false);
+        this.btnCodificar.setEnabled(false);
+        this.btnVerTabla.setEnabled(false);
+        this.textBit.setEnabled(false);
+        this.textCodificado.setEnabled(false);
     }
 
     /**
@@ -34,25 +47,38 @@ public class Formulario extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableTVerdad = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jPanelVariables = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         cmbElementosDeMemoria = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        sltXor = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         sltSalidas = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
-        btnIngresar = new javax.swing.JButton();
+        btnCapturar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jPanelMensaje = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         btnCodificar = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        textMensaje = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        textBit = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        textCodificado = new javax.swing.JTextArea();
+        jPanelEcuaciones = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        sltEcuacion3 = new javax.swing.JComboBox<>();
+        btnIngresar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox6 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        sltEcuacion1 = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        sltEcuacion4 = new javax.swing.JComboBox<>();
+        sltEcuacion2 = new javax.swing.JComboBox<>();
+        btnGenerarTabla = new javax.swing.JButton();
+        jLabelNum = new javax.swing.JLabel();
+        btnVerTabla = new javax.swing.JButton();
 
         JDialogTablaVerdad.setMinimumSize(new java.awt.Dimension(600, 400));
 
@@ -88,9 +114,11 @@ public class Formulario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("CODIFICADOR FEC");
 
-        jLabel2.setText("Ingrese cantidad de elementos de memoria:");
+        jLabel2.setText("Seleccione cantidad de elementos de memoria:");
 
         cmbElementosDeMemoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
         cmbElementosDeMemoria.addActionListener(new java.awt.event.ActionListener() {
@@ -99,33 +127,75 @@ public class Formulario extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Digite cantidad de salidas:");
+        jLabel11.setText("Seleccione cantidad de XOR:");
+
+        sltXor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        sltXor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sltXorActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Seleccione cantidad de salidas:");
 
         sltSalidas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
 
-        jLabel4.setText("Describa las ecuaciones de las salidas:");
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3" }));
-
-        jLabel5.setText("XOR");
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3", " " }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+        btnCapturar.setText("Capturar datos");
+        btnCapturar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
+                btnCapturarActionPerformed(evt);
             }
         });
 
-        jLabel6.setText("XOR");
-
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3", "Niguna" }));
-
-        btnIngresar.setText("Ingresar");
-        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Reiniciar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout jPanelVariablesLayout = new javax.swing.GroupLayout(jPanelVariables);
+        jPanelVariables.setLayout(jPanelVariablesLayout);
+        jPanelVariablesLayout.setHorizontalGroup(
+            jPanelVariablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelVariablesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelVariablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel3))
+                .addGap(32, 32, 32)
+                .addGroup(jPanelVariablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(sltSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelVariablesLayout.createSequentialGroup()
+                        .addGroup(jPanelVariablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbElementosDeMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sltXor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(72, 72, 72)
+                        .addGroup(jPanelVariablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCapturar)
+                            .addComponent(jButton1))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelVariablesLayout.setVerticalGroup(
+            jPanelVariablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelVariablesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelVariablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cmbElementosDeMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelVariablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(sltXor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCapturar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelVariablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(sltSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         jLabel7.setText("Digite mensaje a codificar con el sistema:");
 
@@ -136,373 +206,211 @@ public class Formulario extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel8.setText("Ingresar mensaje binario");
+        textMensaje.setColumns(20);
+        textMensaje.setRows(5);
+        jScrollPane2.setViewportView(textMensaje);
+
+        textBit.setColumns(20);
+        textBit.setRows(5);
+        jScrollPane3.setViewportView(textBit);
+
+        textCodificado.setColumns(20);
+        textCodificado.setRows(5);
+        jScrollPane4.setViewportView(textCodificado);
+
+        javax.swing.GroupLayout jPanelMensajeLayout = new javax.swing.GroupLayout(jPanelMensaje);
+        jPanelMensaje.setLayout(jPanelMensajeLayout);
+        jPanelMensajeLayout.setHorizontalGroup(
+            jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMensajeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4)
+                    .addGroup(jPanelMensajeLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelMensajeLayout.createSequentialGroup()
+                        .addGroup(jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(btnCodificar))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanelMensajeLayout.setVerticalGroup(
+            jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMensajeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCodificar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel4.setText("Describa las ecuaciones de las salidas:");
+
+        jLabel6.setText("XOR");
+
+        sltEcuacion3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3", "Ninguna" }));
+
+        btnIngresar.setText("Ingresar");
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
 
         jLabel9.setForeground(new java.awt.Color(204, 0, 0));
         jLabel9.setText("Seleccione ninguno en los items en caso de que la operacion no contenga más XOR (debe haber minimo uno)");
 
         jLabel10.setText("XOR");
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3", "Niguna" }));
+        sltEcuacion1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3" }));
 
-        jButton1.setText("Generar Tabla de Verdad");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel5.setText("XOR");
+
+        sltEcuacion4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3", "Ninguna" }));
+
+        sltEcuacion2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3", "Ninguna" }));
+        sltEcuacion2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                sltEcuacion2ActionPerformed(evt);
             }
         });
+
+        btnGenerarTabla.setText("Generar Tabla de Verdad");
+        btnGenerarTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarTablaActionPerformed(evt);
+            }
+        });
+
+        jLabelNum.setText("Ecuacion #1");
+
+        btnVerTabla.setText("Ver Tabla de Verdad");
+        btnVerTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerTablaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelEcuacionesLayout = new javax.swing.GroupLayout(jPanelEcuaciones);
+        jPanelEcuaciones.setLayout(jPanelEcuacionesLayout);
+        jPanelEcuacionesLayout.setHorizontalGroup(
+            jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelEcuacionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addGroup(jPanelEcuacionesLayout.createSequentialGroup()
+                        .addComponent(btnGenerarTabla)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVerTabla))
+                    .addGroup(jPanelEcuacionesLayout.createSequentialGroup()
+                        .addGroup(jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelEcuacionesLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelNum))
+                            .addGroup(jPanelEcuacionesLayout.createSequentialGroup()
+                                .addComponent(sltEcuacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(sltEcuacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(sltEcuacion3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel10)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(sltEcuacion4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnIngresar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelEcuacionesLayout.setVerticalGroup(
+            jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelEcuacionesLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabelNum))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(sltEcuacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(sltEcuacion2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(sltEcuacion3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnIngresar)
+                    .addComponent(jLabel10)
+                    .addComponent(sltEcuacion4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGenerarTabla)
+                    .addComponent(btnVerTabla))
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(222, 222, 222))
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel4)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel3))
-                                    .addGap(45, 45, 45)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(sltSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(cmbElementosDeMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jLabel7))
-                        .addGap(42, 42, 42)
-                        .addComponent(btnCodificar))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanelEcuaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanelMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanelVariables, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel10)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnIngresar)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                        .addGap(245, 245, 245)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cmbElementosDeMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(sltSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
-                .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIngresar)
-                    .addComponent(jLabel10)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addGap(8, 8, 8)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
+                .addComponent(jPanelVariables, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCodificar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addComponent(jPanelEcuaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanelMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
+    private void fnCrearTabla() {
+        Fec oFec = new Fec(this.iElementMemoria, this.iSalida, this.iXOR);
+        this.iTabla = oFec.getTablaVerdad();
+    }
 
-    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-
-    }//GEN-LAST:event_btnIngresarActionPerformed
-
-    private void btnCodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodificarActionPerformed
-        // TODO add your handling code here:
-        
+    private void fnGenerarTabla() {
+        int iAux = iElementMemoria;
         this.JDialogTablaVerdad.show();
-        DefaultTableModel modelo=new DefaultTableModel(); 
-        this.tableTVerdad.setModel(modelo); 
-        
-         if(this.cmbElementosDeMemoria.getSelectedItem() == "1")
-        {
-            int EstadosIniciales[][] = new int[4][2];
-            int EstadosSiguientes[][] = new int[4][1];
-            
-                EstadosIniciales[0][0] = 0;
-                EstadosIniciales[0][1] = 1;   
-                EstadosIniciales[1][0] = 1;
-                EstadosIniciales[1][1] = 0;
-                EstadosIniciales[2][0] = 0;
-                EstadosIniciales[2][1] = 0;   
-                EstadosIniciales[3][0] = 1;
-                EstadosIniciales[3][1] = 1;
-                
-                String cadena = "";
-                modelo.addColumn("E");
-                modelo.addColumn("D1(actual)");
-                modelo.addColumn("D1(Siguiente)");
-                
-                for(int i=0; i<4;i++){
-                    //System.out.println("\n");
-                    EstadosSiguientes[i][0]=EstadosIniciales[i][0];
-                    for(int j=0; j<2;j++)
-                    {
-                        cadena = cadena + " " + EstadosIniciales[i][j];
-                    } 
-                   
-                    Object[] fila = new Object[3]; 
-                    fila[0]=EstadosIniciales[i][0];
-                    fila[1]=EstadosIniciales[i][1];
-                    fila[2]=EstadosSiguientes[i][0];
-                    modelo.addRow(fila); 
-                    System.out.println(cadena);
-                    cadena = "";
-                }
-                
-                for(int g=0; g<4;g++)
-                    {
-                        System.out.println(EstadosSiguientes[g][0]);
-                    }         
-          
-                             
-        }
-        else
-            if(this.cmbElementosDeMemoria.getSelectedItem() == "2")
-            {
-                int EstadosIniciales[][] = new int[8][3];
-                int EstadosSiguientes[][] = new int[8][2];
-                
-                EstadosIniciales[0][0] = 0;
-                EstadosIniciales[0][1] = 0;   
-                EstadosIniciales[0][2] = 0; 
-                EstadosIniciales[1][0] = 1;
-                EstadosIniciales[1][1] = 0;
-                EstadosIniciales[1][2] = 1;
-                EstadosIniciales[2][0] = 0;
-                EstadosIniciales[2][1] = 1;
-                EstadosIniciales[2][2] = 0;
-                EstadosIniciales[3][0] = 1;
-                EstadosIniciales[3][1] = 1;
-                EstadosIniciales[3][2] = 1;
-                EstadosIniciales[4][0] = 0;
-                EstadosIniciales[4][1] = 1;
-                EstadosIniciales[4][2] = 1;
-                EstadosIniciales[5][0] = 1;
-                EstadosIniciales[5][1] = 0;
-                EstadosIniciales[5][2] = 0;
-                EstadosIniciales[6][0] = 0;
-                EstadosIniciales[6][1] = 0;
-                EstadosIniciales[6][2] = 1;
-                EstadosIniciales[7][0] = 1;
-                EstadosIniciales[7][1] = 1;
-                EstadosIniciales[7][2] = 0;
-                
-                String cadena = "";
-                modelo.addColumn("E");
-                modelo.addColumn("D1(actual)");
-                modelo.addColumn("D2(actual)");
-                modelo.addColumn("D1(Siguiente)");
-                modelo.addColumn("D2(siguiente)");
-                
-                
-                 for(int i=0; i<8;i++){
-                    //System.out.println("\n");
-                    EstadosSiguientes[i][0]=EstadosIniciales[i][0];
-                    EstadosSiguientes[i][1]=EstadosIniciales[i][1];
-                    for(int j=0; j<3;j++)
-                    {
-                        cadena = cadena + " " + EstadosIniciales[i][j];
-                    } 
-                    
-                    Object[] fila = new Object[5]; 
-                    fila[0]=EstadosIniciales[i][0];
-                    fila[1]=EstadosIniciales[i][1];
-                    fila[2]=EstadosIniciales[i][2];
-                    fila[3]=EstadosSiguientes[i][0];
-                    fila[4]=EstadosSiguientes[i][1];
-                    modelo.addRow(fila); 
-                    System.out.println(cadena);
-                    cadena = "";
-                   
-                }
-                 
-                 String cadena2 = "";
-                 for(int i=0; i<8;i++){
-                    for(int j=0; j<2;j++)
-                    {
-                        cadena2 = cadena2 + " " + EstadosSiguientes[i][j];
-                    } 
-                    System.out.println(cadena2);
-                    cadena2 = "";
-                   
-                }
-            }
-            else
-                if(this.cmbElementosDeMemoria.getSelectedItem() == "3")
-                {
-                    int EstadosIniciales[][] = new int[16][4];
-                    int EstadosSiguientes[][] = new int[16][3];
-                    
-                    EstadosIniciales[0][0] = 0;
-                    EstadosIniciales[0][1] = 0;   
-                    EstadosIniciales[0][2] = 0; 
-                    EstadosIniciales[0][3] = 0;
-                    EstadosIniciales[1][0] = 1;
-                    EstadosIniciales[1][1] = 0;   
-                    EstadosIniciales[1][2] = 0; 
-                    EstadosIniciales[1][3] = 0;
-                    EstadosIniciales[2][0] = 0;
-                    EstadosIniciales[2][1] = 0;   
-                    EstadosIniciales[2][2] = 1; 
-                    EstadosIniciales[2][3] = 0;
-                    EstadosIniciales[3][0] = 1;
-                    EstadosIniciales[3][1] = 0;   
-                    EstadosIniciales[3][2] = 1; 
-                    EstadosIniciales[3][3] = 0;
-                    EstadosIniciales[4][0] = 0;
-                    EstadosIniciales[4][1] = 1;   
-                    EstadosIniciales[4][2] = 0; 
-                    EstadosIniciales[4][3] = 0;
-                    EstadosIniciales[5][0] = 1;
-                    EstadosIniciales[5][1] = 1;   
-                    EstadosIniciales[5][2] = 0; 
-                    EstadosIniciales[5][3] = 0;
-                    EstadosIniciales[6][0] = 0;
-                    EstadosIniciales[6][1] = 0;   
-                    EstadosIniciales[6][2] = 0; 
-                    EstadosIniciales[6][3] = 1;
-                    EstadosIniciales[7][0] = 1;
-                    EstadosIniciales[7][1] = 0;   
-                    EstadosIniciales[7][2] = 0; 
-                    EstadosIniciales[7][3] = 1;
-                    EstadosIniciales[8][0] = 0;
-                    EstadosIniciales[8][1] = 0;   
-                    EstadosIniciales[8][2] = 1; 
-                    EstadosIniciales[8][3] = 1;
-                    EstadosIniciales[9][0] = 1;
-                    EstadosIniciales[9][1] = 0;   
-                    EstadosIniciales[9][2] = 1; 
-                    EstadosIniciales[9][3] = 1;
-                    EstadosIniciales[10][0] = 0;
-                    EstadosIniciales[10][1] = 1;   
-                    EstadosIniciales[10][2] = 1; 
-                    EstadosIniciales[10][3] = 1;
-                    EstadosIniciales[11][0] = 1;
-                    EstadosIniciales[11][1] = 1;   
-                    EstadosIniciales[11][2] = 1; 
-                    EstadosIniciales[11][3] = 1;
-                    EstadosIniciales[12][0] = 0;
-                    EstadosIniciales[12][1] = 1;   
-                    EstadosIniciales[12][2] = 0; 
-                    EstadosIniciales[12][3] = 1;
-                    EstadosIniciales[13][0] = 1;
-                    EstadosIniciales[13][1] = 1;   
-                    EstadosIniciales[13][2] = 0; 
-                    EstadosIniciales[13][3] = 1;
-                    EstadosIniciales[14][0] = 0;
-                    EstadosIniciales[14][1] = 1;   
-                    EstadosIniciales[14][2] = 1; 
-                    EstadosIniciales[14][3] = 0;
-                    EstadosIniciales[15][0] = 1;
-                    EstadosIniciales[15][1] = 1;   
-                    EstadosIniciales[15][2] = 1; 
-                    EstadosIniciales[15][3] = 0;
-                    
-                    String cadena = "";
-                    modelo.addColumn("E");
-                    modelo.addColumn("D1(actual)");
-                    modelo.addColumn("D2(actual)");
-                    modelo.addColumn("D3(actual)");
-                    modelo.addColumn("D1(Siguiente)");
-                    modelo.addColumn("D2(siguiente)");
-                    modelo.addColumn("D3(siguiente)");
-
-                     for(int i=0; i<16;i++){
-                    //System.out.println("\n");
-                    EstadosSiguientes[i][0]=EstadosIniciales[i][0];
-                    EstadosSiguientes[i][1]=EstadosIniciales[i][1];
-                    EstadosSiguientes[i][2]=EstadosIniciales[i][2];
-                    for(int j=0; j<4;j++)
-                    {
-                        cadena = cadena + " " + EstadosIniciales[i][j];
-                    } 
-                    System.out.println(cadena);
-                    cadena = "";
-                }
-                     
-                    String cadena2 = "";
-                 for(int i=0; i<16;i++){
-                    for(int j=0; j<3;j++)
-                    {
-                        cadena2 = cadena2 + " " + EstadosSiguientes[i][j];
-                    } 
-                    
-                    Object[] fila = new Object[7]; 
-                    fila[0]=EstadosIniciales[i][0];
-                    fila[1]=EstadosIniciales[i][1];
-                    fila[2]=EstadosIniciales[i][2];
-                    fila[3]=EstadosIniciales[i][3];
-                    fila[4]=EstadosSiguientes[i][0];
-                    fila[5]=EstadosSiguientes[i][1];
-                    fila[6]=EstadosSiguientes[i][2];
-                    modelo.addRow(fila); 
-                    System.out.println(cadena2);
-                    cadena2 = "";
-                   
-                } 
-                }
-        
-    }//GEN-LAST:event_btnCodificarActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Fec oFec = new Fec(Integer.parseInt(this.cmbElementosDeMemoria.getSelectedItem().toString()), Integer.parseInt(this.sltSalidas.getSelectedItem().toString()));
-        int[][] iTabla = oFec.getTablaVerdad();
-        int iAux = Integer.parseInt(this.cmbElementosDeMemoria.getSelectedItem().toString());
-        this.JDialogTablaVerdad.show();
-        DefaultTableModel modelo=new DefaultTableModel(); 
+        DefaultTableModel modelo = new DefaultTableModel();
         this.tableTVerdad.setModel(modelo);
         // For para imprimir la matriz de prueba
         int iAux2 = 0;
-        for (int i = 0; i < iTabla[0].length; i++) {
+        for (int i = 0; i < this.iTabla[0].length; i++) {
             if (i == 0) {
                 modelo.addColumn("E");
-            } else if (i < (iAux + 1)){
+            } else if (i < (iAux + 1)) {
                 if (i == 1) {
                     iAux2 = 1;
                 }
@@ -522,20 +430,112 @@ public class Formulario extends javax.swing.JFrame {
                 iAux2++;
             }
         }
-        for (int i = 0; i < iTabla.length; i++) {
-            Object[] fila = new Object[iTabla[i].length];
-            for (int j = 0; j < iTabla[i].length; j++) {
-                    fila[j] = iTabla[i][j];
-                    System.out.print("|" + iTabla[i][j] + "|");
+        for (int i = 0; i < this.iTabla.length; i++) {
+            Object[] fila = new Object[this.iTabla[i].length];
+            for (int j = 0; j < this.iTabla[i].length; j++) {
+                fila[j] = this.iTabla[i][j];
+                System.out.print("|" + this.iTabla[i][j] + "|");
             }
             System.out.println("");
             modelo.addRow(fila);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
 
     private void cmbElementosDeMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbElementosDeMemoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbElementosDeMemoriaActionPerformed
+
+    private void sltXorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltXorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sltXorActionPerformed
+
+    private void btnGenerarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarTablaActionPerformed
+        this.fnCrearTabla();
+        this.btnGenerarTabla.setEnabled(false);
+        this.btnVerTabla.setEnabled(true);
+        this.textMensaje.setEnabled(true);
+        this.btnCodificar.setEnabled(true);
+    }//GEN-LAST:event_btnGenerarTablaActionPerformed
+
+    public String fnConvertirTextBit(String recibido) {
+        //calculo el tamaño de la cadena
+        int longitud = recibido.length();
+        //creo un array char con el string anterior
+        char cadChar[] = recibido.toCharArray();
+        //inicializo varibles a utilizar en el ciclo
+        String charBin = "";
+        //ciclo que me convierte cada letra en binario
+        for (int i = 0; i < cadChar.length; i++) {
+            //convierto a binario cada caracter
+            charBin += String.format("%8s", Integer.toBinaryString(cadChar[i])).replace(" ", "0");
+        }
+        return charBin;
+    }
+    
+    public String fnConvertirBitText(String recibido) {
+        String frase = "";//almacena la frase completa
+        for (int i = 0; i < recibido.length(); i += 8) {//recorre la frase de 8 en 8
+            /*separa la cadena cada 8 digitos con substring*/
+            /*entrega un numero decimal a partir de un numero binario de 8 bit*/
+            /*concadena la frase y transfroma el decimal a Ascii*/
+            frase += (char) Integer.parseInt(recibido.substring(i, i + 8), 2);
+        }
+        return frase;
+    }
+
+    private void sltEcuacion2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltEcuacion2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sltEcuacion2ActionPerformed
+
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        if ((this.iCantEcuaciones + 1) <= this.iSalida) {
+            this.iCantEcuaciones = this.iCantEcuaciones + 1;
+            this.jLabelNum.setText("Ecuacion #" + this.iCantEcuaciones);
+        } else {
+            this.btnIngresar.setEnabled(false);
+            this.btnGenerarTabla.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void btnCapturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarActionPerformed
+        this.iElementMemoria = Integer.parseInt(this.cmbElementosDeMemoria.getSelectedItem().toString());
+        this.iXOR = Integer.parseInt(this.sltXor.getSelectedItem().toString());
+        this.iSalida = Integer.parseInt(this.sltSalidas.getSelectedItem().toString());
+        this.btnIngresar.setEnabled(true);
+        this.btnCapturar.setEnabled(false);
+    }//GEN-LAST:event_btnCapturarActionPerformed
+
+    private void btnVerTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerTablaActionPerformed
+        this.fnGenerarTabla();
+    }//GEN-LAST:event_btnVerTablaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.cmbElementosDeMemoria.setSelectedIndex(0);
+        this.sltXor.setSelectedIndex(0);
+        this.sltSalidas.setSelectedIndex(0);
+        this.sltEcuacion1.setSelectedIndex(0);
+        this.sltEcuacion2.setSelectedIndex(0);
+        this.sltEcuacion3.setSelectedIndex(0);
+        this.sltEcuacion4.setSelectedIndex(0);
+        this.btnIngresar.setEnabled(false);
+        this.btnGenerarTabla.setEnabled(false);
+        this.textMensaje.setEnabled(false);
+        this.btnCodificar.setEnabled(false);
+        this.btnVerTabla.setEnabled(false);
+        this.jLabelNum.setText("Ecuacion #1");
+        this.textMensaje.setText("");
+        this.textBit.setText("");
+        this.textCodificado.setText("");
+        this.iCantEcuaciones = 1;
+        this.btnCapturar.setEnabled(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnCodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodificarActionPerformed
+        String sBinario = this.fnConvertirTextBit(this.textMensaje.getText());
+        this.textBit.setText(sBinario);
+//        String sTexto = this.fnConvertirBitText(sBinario);
+//        System.out.println(sTexto);
+    }//GEN-LAST:event_btnCodificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -574,28 +574,41 @@ public class Formulario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog JDialogTablaVerdad;
+    private javax.swing.JButton btnCapturar;
     private javax.swing.JButton btnCodificar;
+    private javax.swing.JButton btnGenerarTabla;
     private javax.swing.JButton btnIngresar;
+    private javax.swing.JButton btnVerTabla;
     private javax.swing.JComboBox<String> cmbElementosDeMemoria;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelNum;
+    private javax.swing.JPanel jPanelEcuaciones;
+    private javax.swing.JPanel jPanelMensaje;
+    private javax.swing.JPanel jPanelVariables;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JComboBox<String> sltEcuacion1;
+    private javax.swing.JComboBox<String> sltEcuacion2;
+    private javax.swing.JComboBox<String> sltEcuacion3;
+    private javax.swing.JComboBox<String> sltEcuacion4;
     private javax.swing.JComboBox<String> sltSalidas;
+    private javax.swing.JComboBox<String> sltXor;
     private javax.swing.JTable tableTVerdad;
+    private javax.swing.JTextArea textBit;
+    private javax.swing.JTextArea textCodificado;
+    private javax.swing.JTextArea textMensaje;
     // End of variables declaration//GEN-END:variables
 
 }
