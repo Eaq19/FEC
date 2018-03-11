@@ -6,6 +6,7 @@
 package Logica;
 
 import static java.lang.Math.pow;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -22,6 +23,7 @@ public class Fec {
     private String[] aEstados = null;
     private String[][] sSalidas = null;
     private int[][] sEstadoFinal = null;
+    private ArrayList<Integer> aListEntrada = new ArrayList<Integer>();
 
     public Fec(int iElement, int iSalidas, int iXOR, String[] aEcuacion) {
         //Variables inicializadas
@@ -208,7 +210,69 @@ public class Fec {
             sText += this.sSalidas[Integer.parseInt(Character.toString(cadChar[i]))][iAnterior];
             iAnterior = this.sEstadoFinal[Integer.parseInt(Character.toString(cadChar[i]))][iAnterior];
         }
+        if (iAnterior != 0) {
+            this.aListEntrada = new ArrayList<Integer>();
+            ArrayList<Integer> base = new ArrayList<Integer>();
+            base.add(iAnterior);
+            base = this.getCaminoInical(iAnterior, base);
+            sText += "~";
+            for (int j = 0; j < this.aListEntrada.size(); j++) {
+                sText += this.sSalidas[this.aListEntrada.get(j)][base.get(j)];
+            }
+        }
         return sText;
+    }
+    
+    private ArrayList<Integer> getCaminoInical(int iAnterior, ArrayList<Integer> aBase) {
+        boolean bValidacion = true;
+        for (int j = 0; j < aBase.size(); j++) {
+            if (aBase.get(j) == 0) {
+                bValidacion = false;
+            }
+        }
+        if (bValidacion) {
+            for (int i = 0; i < 2; i++) {
+                int iEstadoActual = this.sEstadoFinal[i][iAnterior];
+                if (iEstadoActual == 0) {
+                    aBase.add(iEstadoActual);
+                    this.aListEntrada.add(i);
+                    return aBase;
+                } else {
+                    boolean bAux = true;
+                    for (int j = 0; j < aBase.size(); j++) {
+                        if (aBase.get(j) == iEstadoActual) {
+                            bAux = false;
+                            break;
+                        }
+                    }
+                    if (bAux) {
+                        ArrayList<Integer> aAux = aBase;
+                        aAux.add(iEstadoActual);
+                        aAux = this.getCaminoInical(iEstadoActual, aBase);
+                        if (aAux == aBase) {
+                            for (int j = 0; j < aAux.size(); j++) {
+                                if (aAux.get(j) == 0) {
+                                    this.aListEntrada.add(i);
+                                    return aAux;
+                                }
+                            }
+                            aAux = null;
+                            continue;
+                        } else {
+                           for (int j = 0; j < aAux.size(); j++) {
+                                if (aAux.get(j) == 0) {
+                                    this.aListEntrada.add(i);
+                                    return aAux;
+                                }
+                            }
+                        }
+                    } else {
+                        return aBase;
+                    }
+                }
+            }
+        }
+        return aBase;
     }
     
 }
