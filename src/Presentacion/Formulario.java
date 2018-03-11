@@ -414,7 +414,7 @@ public class Formulario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void fnCrearTabla() {
-        Fec oFec = new Fec(this.iElementMemoria, this.iSalida, this.iXOR);
+        Fec oFec = new Fec(this.iElementMemoria, this.iSalida, this.iXOR, this.aEcuacion);
         this.iTabla = oFec.getTablaVerdad();
     }
 
@@ -510,7 +510,7 @@ public class Formulario extends javax.swing.JFrame {
             boolean bValidacion = this.fnCrearEcuacion();
             if (bValidacion) {
                 this.iCantEcuaciones = this.iCantEcuaciones + 1;
-                this.jLabelNum.setText("Ecuacion #" + this.iCantEcuaciones);
+                this.jLabelNum.setText("Ecuacion #" + (this.iCantEcuaciones + 1));
                 this.jError.setText("");
                 this.jError1.setText("");
                 this.sltEcuacion1.setSelectedIndex(0);
