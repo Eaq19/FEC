@@ -17,21 +17,16 @@ public class Formulario extends javax.swing.JFrame {
     private int iElementMemoria = 0;
     private int iXOR = 0;
     private int iSalida = 0;
-    private int iCantEcuaciones = 1;
+    private int iCantEcuaciones = 0;
     private int[][] iTabla = null;
+    private String[] aEcuacion = null;
 
     /**
      * Creates new form Formulario
      */
     public Formulario() {
         initComponents();
-        this.btnIngresar.setEnabled(false);
-        this.btnGenerarTabla.setEnabled(false);
-        this.textMensaje.setEnabled(false);
-        this.btnCodificar.setEnabled(false);
-        this.btnVerTabla.setEnabled(false);
-        this.textBit.setEnabled(false);
-        this.textCodificado.setEnabled(false);
+        this.fnReiniciar();
     }
 
     /**
@@ -79,6 +74,8 @@ public class Formulario extends javax.swing.JFrame {
         btnGenerarTabla = new javax.swing.JButton();
         jLabelNum = new javax.swing.JLabel();
         btnVerTabla = new javax.swing.JButton();
+        jError = new javax.swing.JLabel();
+        jError1 = new javax.swing.JLabel();
 
         JDialogTablaVerdad.setMinimumSize(new java.awt.Dimension(600, 400));
 
@@ -129,7 +126,7 @@ public class Formulario extends javax.swing.JFrame {
 
         jLabel11.setText("Seleccione cantidad de XOR:");
 
-        sltXor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        sltXor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3" }));
         sltXor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sltXorActionPerformed(evt);
@@ -255,6 +252,7 @@ public class Formulario extends javax.swing.JFrame {
 
         jLabel4.setText("Describa las ecuaciones de las salidas:");
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("XOR");
 
         sltEcuacion3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3", "Ninguna" }));
@@ -269,10 +267,12 @@ public class Formulario extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(204, 0, 0));
         jLabel9.setText("Seleccione ninguno en los items en caso de que la operacion no contenga más XOR (debe haber minimo uno)");
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("XOR");
 
         sltEcuacion1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3" }));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("XOR");
 
         sltEcuacion4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3", "Ninguna" }));
@@ -300,6 +300,11 @@ public class Formulario extends javax.swing.JFrame {
             }
         });
 
+        jError.setForeground(new java.awt.Color(204, 0, 0));
+
+        jError1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jError1.setForeground(new java.awt.Color(204, 0, 0));
+
         javax.swing.GroupLayout jPanelEcuacionesLayout = new javax.swing.GroupLayout(jPanelEcuaciones);
         jPanelEcuaciones.setLayout(jPanelEcuacionesLayout);
         jPanelEcuacionesLayout.setHorizontalGroup(
@@ -307,11 +312,6 @@ public class Formulario extends javax.swing.JFrame {
             .addGroup(jPanelEcuacionesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addGroup(jPanelEcuacionesLayout.createSequentialGroup()
-                        .addComponent(btnGenerarTabla)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnVerTabla))
                     .addGroup(jPanelEcuacionesLayout.createSequentialGroup()
                         .addGroup(jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelEcuacionesLayout.createSequentialGroup()
@@ -319,22 +319,35 @@ public class Formulario extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelNum))
                             .addGroup(jPanelEcuacionesLayout.createSequentialGroup()
-                                .addComponent(sltEcuacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(sltEcuacion1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(sltEcuacion2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
                                 .addComponent(sltEcuacion3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel10)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(sltEcuacion4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnIngresar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel10)
+                                .addGap(18, 18, 18)
+                                .addComponent(sltEcuacion4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnIngresar)
+                        .addGap(31, 31, 31))
+                    .addGroup(jPanelEcuacionesLayout.createSequentialGroup()
+                        .addGroup(jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelEcuacionesLayout.createSequentialGroup()
+                                .addComponent(jError1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9)
+                                .addGroup(jPanelEcuacionesLayout.createSequentialGroup()
+                                    .addComponent(btnGenerarTabla)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnVerTabla))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanelEcuacionesLayout.setVerticalGroup(
             jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,11 +368,15 @@ public class Formulario extends javax.swing.JFrame {
                     .addComponent(sltEcuacion4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jError1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelEcuacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGenerarTabla)
                     .addComponent(btnVerTabla))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -382,14 +399,15 @@ public class Formulario extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(31, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanelVariables, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelEcuaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanelMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -488,28 +506,157 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_sltEcuacion2ActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        if ((this.iCantEcuaciones + 1) <= this.iSalida) {
-            this.iCantEcuaciones = this.iCantEcuaciones + 1;
-            this.jLabelNum.setText("Ecuacion #" + this.iCantEcuaciones);
+        if (this.fnValidar() > 0) {
+            boolean bValidacion = this.fnCrearEcuacion();
+            if (bValidacion) {
+                this.iCantEcuaciones = this.iCantEcuaciones + 1;
+                this.jLabelNum.setText("Ecuacion #" + this.iCantEcuaciones);
+                this.jError.setText("");
+                this.jError1.setText("");
+                this.sltEcuacion1.setSelectedIndex(0);
+                this.sltEcuacion2.setSelectedIndex(0);
+                this.sltEcuacion3.setSelectedIndex(0);
+                this.sltEcuacion4.setSelectedIndex(0);
+            } else {
+                this.jError1.setText("Error: ");
+                this.jError.setText("No se ha seleccionado los XOR correctos");
+            }
         } else {
+            this.jError1.setText("Error: ");
+            this.jError.setText("Debe seleccionar elementos");
+        }
+        if (this.iCantEcuaciones == this.iSalida) {
             this.btnIngresar.setEnabled(false);
             this.btnGenerarTabla.setEnabled(true);
+            this.sltEcuacion1.setEnabled(false);
+            this.sltEcuacion2.setEnabled(false);
+            this.sltEcuacion3.setEnabled(false);
+            this.sltEcuacion4.setEnabled(false);
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
-
+    
+    private boolean fnCrearEcuacion() {
+        String sText = "";
+        if (this.sltEcuacion1.getSelectedItem().toString() != "Ninguna") {
+            if (sText == ""){
+                sText += this.sltEcuacion1.getSelectedItem().toString();
+            } else {
+                sText += " XOR " + this.sltEcuacion1.getSelectedItem().toString();
+            }
+        }
+        if (this.sltEcuacion2.getSelectedItem().toString() != "Ninguna") {
+            if (sText == ""){
+                sText += this.sltEcuacion2.getSelectedItem().toString();
+            } else {
+                sText += " XOR " + this.sltEcuacion2.getSelectedItem().toString();
+            }
+        }
+        if (this.sltEcuacion3.getSelectedItem().toString() != "Ninguna") {
+            if (sText == ""){
+                sText += this.sltEcuacion3.getSelectedItem().toString();
+            } else {
+                sText += " XOR " + this.sltEcuacion3.getSelectedItem().toString();
+            }
+        }
+        if (this.sltEcuacion4.getSelectedItem().toString() != "Ninguna") {
+            if (sText == ""){
+                sText += this.sltEcuacion4.getSelectedItem().toString();
+            } else {
+                sText += " XOR " + this.sltEcuacion4.getSelectedItem().toString();
+            }
+        }
+        boolean bAux = false;
+        aEcuacion[this.iCantEcuaciones] = sText;
+        if ((this.iCantEcuaciones + 1) == this.iSalida) {
+            String sXOR =  "XOR";
+            int iAux = 0;
+            for (int i = 0; i < aEcuacion.length; i++) {
+                if (aEcuacion[i].contains(sXOR)) {
+                    iAux++;
+                }
+            }
+            if (iAux != this.iXOR) {
+                bAux = false;
+            } else {
+                bAux = true;
+            }
+        } else {
+            bAux = true;
+        }
+        if (!bAux) {
+            aEcuacion[this.iCantEcuaciones] = "";
+        }
+        return bAux;
+    }
+    
+    private int fnValidar() {
+        int iAux = 0;
+        if (this.sltEcuacion1.getSelectedItem().toString() != "Ninguna") {
+            iAux++;
+        }
+        if (this.sltEcuacion2.getSelectedItem().toString() != "Ninguna") {
+            iAux++;
+        }
+        if (this.sltEcuacion3.getSelectedItem().toString() != "Ninguna") {
+            iAux++;
+        }
+        if (this.sltEcuacion4.getSelectedItem().toString() != "Ninguna") {
+            iAux++;
+        }
+        return iAux;
+    }
+    
     private void btnCapturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarActionPerformed
         this.iElementMemoria = Integer.parseInt(this.cmbElementosDeMemoria.getSelectedItem().toString());
         this.iXOR = Integer.parseInt(this.sltXor.getSelectedItem().toString());
         this.iSalida = Integer.parseInt(this.sltSalidas.getSelectedItem().toString());
+        aEcuacion = new String[this.iSalida];
         this.btnIngresar.setEnabled(true);
+        this.cmbElementosDeMemoria.setEnabled(false);
+        this.sltXor.setEnabled(false);
+        this.sltSalidas.setEnabled(false);
         this.btnCapturar.setEnabled(false);
+        this.sltEcuacion1.setEnabled(true);
+        this.sltEcuacion2.setEnabled(true);
+        this.sltEcuacion3.setEnabled(true);
+        this.sltEcuacion4.setEnabled(true);
+        this.sltEcuacion1.removeAllItems();
+        this.sltEcuacion2.removeAllItems();
+        this.sltEcuacion3.removeAllItems();
+        this.sltEcuacion4.removeAllItems();
+        this.fnAgregarItems(this.sltEcuacion1);
+        this.fnAgregarItems(this.sltEcuacion2);
+        this.fnAgregarItems(this.sltEcuacion3);
+        this.fnAgregarItems(this.sltEcuacion4);
     }//GEN-LAST:event_btnCapturarActionPerformed
-
+    
+    private void fnAgregarItems(javax.swing.JComboBox<String> eSelect) {
+        eSelect.addItem("Ninguna");
+        eSelect.addItem("E");
+        for (int i = 0; i < this.iElementMemoria; i++) {
+            eSelect.addItem("D" + (i+1));
+        }
+    }
+    
     private void btnVerTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerTablaActionPerformed
         this.fnGenerarTabla();
     }//GEN-LAST:event_btnVerTablaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.fnReiniciar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void fnReiniciar() {
+        this.cmbElementosDeMemoria.setEnabled(true);
+        this.sltXor.setEnabled(true);
+        this.sltSalidas.setEnabled(true);
+        this.btnCapturar.setEnabled(true);
+        this.sltEcuacion1.setEnabled(false);
+        this.sltEcuacion2.setEnabled(false);
+        this.sltEcuacion3.setEnabled(false);
+        this.sltEcuacion4.setEnabled(false);
+        this.textBit.setEnabled(false);
+        this.textCodificado.setEnabled(false);
         this.cmbElementosDeMemoria.setSelectedIndex(0);
         this.sltXor.setSelectedIndex(0);
         this.sltSalidas.setSelectedIndex(0);
@@ -526,10 +673,11 @@ public class Formulario extends javax.swing.JFrame {
         this.textMensaje.setText("");
         this.textBit.setText("");
         this.textCodificado.setText("");
-        this.iCantEcuaciones = 1;
-        this.btnCapturar.setEnabled(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+        this.iCantEcuaciones = 0;
+        this.jError.setText("");
+        this.jError1.setText("");
+    }
+    
     private void btnCodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodificarActionPerformed
         String sBinario = this.fnConvertirTextBit(this.textMensaje.getText());
         this.textBit.setText(sBinario);
@@ -581,6 +729,8 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JButton btnVerTabla;
     private javax.swing.JComboBox<String> cmbElementosDeMemoria;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jError;
+    private javax.swing.JLabel jError1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
