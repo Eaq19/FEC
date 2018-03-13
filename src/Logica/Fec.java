@@ -212,7 +212,6 @@ public class Fec {
         for (int i = 0; i < cadChar.length; i++) {
             sText += this.sSalidas[Integer.parseInt(Character.toString(cadChar[i]))][iAnterior];
             iAnterior = this.sEstadoFinal[Integer.parseInt(Character.toString(cadChar[i]))][iAnterior];
-            
             this.sEstadosFinales += "S" + iAnterior;
         }
         this.sCodificado = sText;
@@ -228,9 +227,6 @@ public class Fec {
                 this.sEstadosFinales += "S" + this.sEstadoFinal[this.aListEntrada.get(j)][base.get(j)];
             }
         }
-        System.out.println(sText);
-        System.out.println(this.sEstadosFinales);
-        System.out.println(this.sCodificado);
         return sText;
     }
     
