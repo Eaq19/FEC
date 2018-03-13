@@ -23,6 +23,8 @@ public class Fec {
     private String[] aEstados = null;
     private String[][] sSalidas = null;
     private int[][] sEstadoFinal = null;
+    private String sEstadosFinales = "";
+    private String sCodificado = "";
     private ArrayList<Integer> aListEntrada = new ArrayList<Integer>();
 
     public Fec(int iElement, int iSalidas, int iXOR, String[] aEcuacion) {
@@ -201,6 +203,8 @@ public class Fec {
     
     public String getCodificar(String sEntrada) {
         String sText = "";
+        this.sEstadosFinales = "";
+        this.sCodificado = "";
         //creo un array char con el string anterior
         char cadChar[] = sEntrada.toCharArray();
         //inicializo varibles a utilizar en el ciclo
@@ -208,7 +212,10 @@ public class Fec {
         for (int i = 0; i < cadChar.length; i++) {
             sText += this.sSalidas[Integer.parseInt(Character.toString(cadChar[i]))][iAnterior];
             iAnterior = this.sEstadoFinal[Integer.parseInt(Character.toString(cadChar[i]))][iAnterior];
+            
+            this.sEstadosFinales += "S" + iAnterior;
         }
+        this.sCodificado = sText;
         if (iAnterior != 0) {
             this.aListEntrada = new ArrayList<Integer>();
             ArrayList<Integer> base = new ArrayList<Integer>();
@@ -217,9 +224,22 @@ public class Fec {
             sText += "~";
             for (int j = 0; j < this.aListEntrada.size(); j++) {
                 sText += this.sSalidas[this.aListEntrada.get(j)][base.get(j)];
+                this.sCodificado += this.sSalidas[this.aListEntrada.get(j)][base.get(j)];
+                this.sEstadosFinales += "S" + this.sEstadoFinal[this.aListEntrada.get(j)][base.get(j)];
             }
         }
+        System.out.println(sText);
+        System.out.println(this.sEstadosFinales);
+        System.out.println(this.sCodificado);
         return sText;
+    }
+    
+    public String getsCodificado() {
+        return this.sCodificado;
+    }
+    
+    public String getEstadosFinales () {
+        return this.sEstadosFinales;
     }
     
     private ArrayList<Integer> getCaminoInical(int iAnterior, ArrayList<Integer> aBase) {

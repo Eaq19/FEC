@@ -57,15 +57,6 @@ public class Formulario extends javax.swing.JFrame {
         sltSalidas = new javax.swing.JComboBox<>();
         btnCapturar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jPanelMensaje = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        btnCodificar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        textMensaje = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        textBit = new javax.swing.JTextArea();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        textCodificado = new javax.swing.JTextArea();
         jPanelEcuaciones = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -83,6 +74,20 @@ public class Formulario extends javax.swing.JFrame {
         jError = new javax.swing.JLabel();
         jError1 = new javax.swing.JLabel();
         btnEstados = new javax.swing.JButton();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jPanelMensaje = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        btnCodificar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        textMensaje = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        textBit = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        textCodificado = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txtDecodificado = new javax.swing.JTextArea();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        txtEstadosSalidas = new javax.swing.JTextArea();
 
         JDialogTablaVerdad.setMinimumSize(new java.awt.Dimension(600, 400));
 
@@ -211,7 +216,7 @@ public class Formulario extends javax.swing.JFrame {
                         .addGroup(jPanelVariablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnCapturar)
                             .addComponent(jButton1))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(114, 114, 114))
         );
         jPanelVariablesLayout.setVerticalGroup(
             jPanelVariablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,62 +235,6 @@ public class Formulario extends javax.swing.JFrame {
                 .addGroup(jPanelVariablesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(sltSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jLabel7.setText("Digite mensaje a codificar con el sistema:");
-
-        btnCodificar.setText("Codificar");
-        btnCodificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCodificarActionPerformed(evt);
-            }
-        });
-
-        textMensaje.setColumns(20);
-        textMensaje.setRows(5);
-        jScrollPane2.setViewportView(textMensaje);
-
-        textBit.setColumns(20);
-        textBit.setRows(5);
-        jScrollPane3.setViewportView(textBit);
-
-        textCodificado.setColumns(20);
-        textCodificado.setRows(5);
-        jScrollPane4.setViewportView(textCodificado);
-
-        javax.swing.GroupLayout jPanelMensajeLayout = new javax.swing.GroupLayout(jPanelMensaje);
-        jPanelMensaje.setLayout(jPanelMensajeLayout);
-        jPanelMensajeLayout.setHorizontalGroup(
-            jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelMensajeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4)
-                    .addGroup(jPanelMensajeLayout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelMensajeLayout.createSequentialGroup()
-                        .addGroup(jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(btnCodificar))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanelMensajeLayout.setVerticalGroup(
-            jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelMensajeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCodificar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -428,6 +377,80 @@ public class Formulario extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel7.setText("Digite mensaje a codificar con el sistema:");
+
+        btnCodificar.setText("Codificar");
+        btnCodificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCodificarActionPerformed(evt);
+            }
+        });
+
+        textMensaje.setColumns(20);
+        textMensaje.setRows(5);
+        jScrollPane2.setViewportView(textMensaje);
+
+        textBit.setColumns(20);
+        textBit.setRows(5);
+        jScrollPane3.setViewportView(textBit);
+
+        textCodificado.setColumns(20);
+        textCodificado.setRows(5);
+        jScrollPane4.setViewportView(textCodificado);
+
+        txtDecodificado.setColumns(20);
+        txtDecodificado.setRows(5);
+        jScrollPane5.setViewportView(txtDecodificado);
+
+        txtEstadosSalidas.setColumns(20);
+        txtEstadosSalidas.setRows(5);
+        jScrollPane8.setViewportView(txtEstadosSalidas);
+
+        javax.swing.GroupLayout jPanelMensajeLayout = new javax.swing.GroupLayout(jPanelMensaje);
+        jPanelMensaje.setLayout(jPanelMensajeLayout);
+        jPanelMensajeLayout.setHorizontalGroup(
+            jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMensajeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelMensajeLayout.createSequentialGroup()
+                        .addGroup(jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 12, Short.MAX_VALUE)
+                        .addGroup(jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                            .addComponent(jScrollPane5)))
+                    .addGroup(jPanelMensajeLayout.createSequentialGroup()
+                        .addGroup(jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(btnCodificar))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane8))
+                .addContainerGap())
+        );
+        jPanelMensajeLayout.setVerticalGroup(
+            jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMensajeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCodificar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelMensajeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(84, Short.MAX_VALUE))
+        );
+
+        jScrollPane7.setViewportView(jPanelMensaje);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -435,28 +458,28 @@ public class Formulario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanelEcuaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanelMensaje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanelVariables, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(245, 245, 245)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE))
+                    .addComponent(jPanelEcuaciones, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelVariables, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelVariables, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelEcuaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanelMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -510,14 +533,6 @@ public class Formulario extends javax.swing.JFrame {
         }
         this.JDialogTablaVerdad.show();
     }
-
-    private void cmbElementosDeMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbElementosDeMemoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbElementosDeMemoriaActionPerformed
-
-    private void sltXorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltXorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sltXorActionPerformed
 
     private void btnGenerarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarTablaActionPerformed
         this.fnCrearTabla();
@@ -658,31 +673,7 @@ public class Formulario extends javax.swing.JFrame {
         }
         return iAux;
     }
-    
-    private void btnCapturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarActionPerformed
-        this.iElementMemoria = Integer.parseInt(this.cmbElementosDeMemoria.getSelectedItem().toString());
-        this.iXOR = Integer.parseInt(this.sltXor.getSelectedItem().toString());
-        this.iSalida = Integer.parseInt(this.sltSalidas.getSelectedItem().toString());
-        aEcuacion = new String[this.iSalida];
-        this.btnIngresar.setEnabled(true);
-        this.cmbElementosDeMemoria.setEnabled(false);
-        this.sltXor.setEnabled(false);
-        this.sltSalidas.setEnabled(false);
-        this.btnCapturar.setEnabled(false);
-        this.sltEcuacion1.setEnabled(true);
-        this.sltEcuacion2.setEnabled(true);
-        this.sltEcuacion3.setEnabled(true);
-        this.sltEcuacion4.setEnabled(true);
-        this.sltEcuacion1.removeAllItems();
-        this.sltEcuacion2.removeAllItems();
-        this.sltEcuacion3.removeAllItems();
-        this.sltEcuacion4.removeAllItems();
-        this.fnAgregarItems(this.sltEcuacion1);
-        this.fnAgregarItems(this.sltEcuacion2);
-        this.fnAgregarItems(this.sltEcuacion3);
-        this.fnAgregarItems(this.sltEcuacion4);
-    }//GEN-LAST:event_btnCapturarActionPerformed
-    
+        
     private void fnAgregarItems(javax.swing.JComboBox<String> eSelect) {
         eSelect.addItem("Ninguna");
         eSelect.addItem("E");
@@ -694,10 +685,6 @@ public class Formulario extends javax.swing.JFrame {
     private void btnVerTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerTablaActionPerformed
         this.fnGenerarTabla();
     }//GEN-LAST:event_btnVerTablaActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.fnReiniciar();
-    }//GEN-LAST:event_jButton1ActionPerformed
     
     private void fnReiniciar() {
         this.cmbElementosDeMemoria.setEnabled(true);
@@ -723,10 +710,14 @@ public class Formulario extends javax.swing.JFrame {
         this.btnCodificar.setEnabled(false);
         this.btnVerTabla.setEnabled(false);
         this.btnEstados.setEnabled(false);
+        this.txtDecodificado.setEnabled(false);
+        this.txtEstadosSalidas.setEnabled(false);
         this.jLabelNum.setText("Ecuacion #1");
         this.textMensaje.setText("");
         this.textBit.setText("");
         this.textCodificado.setText("");
+        this.txtDecodificado.setText("");
+        this.txtEstadosSalidas.setText("");
         this.iCantEcuaciones = 0;
         this.jError.setText("");
         this.jError1.setText("");
@@ -736,6 +727,8 @@ public class Formulario extends javax.swing.JFrame {
         String sBinario = this.fnConvertirTextBit(this.textMensaje.getText());
         this.textBit.setText(sBinario);
         this.textCodificado.setText(this.oFec.getCodificar(sBinario));
+        this.txtEstadosSalidas.setText(this.oFec.getEstadosFinales());
+        this.txtDecodificado.setText(this.fnConvertirBitText(this.oFec.getsCodificado()));
 //        String sTexto = this.fnConvertirBitText(sBinario);
 //        System.out.println(sTexto);
     }//GEN-LAST:event_btnCodificarActionPerformed
@@ -757,6 +750,42 @@ public class Formulario extends javax.swing.JFrame {
         modelo.addRow(fila);
         this.jDialogEstados.show();
     }//GEN-LAST:event_btnEstadosActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.fnReiniciar();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnCapturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarActionPerformed
+        this.iElementMemoria = Integer.parseInt(this.cmbElementosDeMemoria.getSelectedItem().toString());
+        this.iXOR = Integer.parseInt(this.sltXor.getSelectedItem().toString());
+        this.iSalida = Integer.parseInt(this.sltSalidas.getSelectedItem().toString());
+        aEcuacion = new String[this.iSalida];
+        this.btnIngresar.setEnabled(true);
+        this.cmbElementosDeMemoria.setEnabled(false);
+        this.sltXor.setEnabled(false);
+        this.sltSalidas.setEnabled(false);
+        this.btnCapturar.setEnabled(false);
+        this.sltEcuacion1.setEnabled(true);
+        this.sltEcuacion2.setEnabled(true);
+        this.sltEcuacion3.setEnabled(true);
+        this.sltEcuacion4.setEnabled(true);
+        this.sltEcuacion1.removeAllItems();
+        this.sltEcuacion2.removeAllItems();
+        this.sltEcuacion3.removeAllItems();
+        this.sltEcuacion4.removeAllItems();
+        this.fnAgregarItems(this.sltEcuacion1);
+        this.fnAgregarItems(this.sltEcuacion2);
+        this.fnAgregarItems(this.sltEcuacion3);
+        this.fnAgregarItems(this.sltEcuacion4);
+    }//GEN-LAST:event_btnCapturarActionPerformed
+
+    private void sltXorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sltXorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sltXorActionPerformed
+
+    private void cmbElementosDeMemoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbElementosDeMemoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbElementosDeMemoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -824,7 +853,10 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JComboBox<String> sltEcuacion1;
     private javax.swing.JComboBox<String> sltEcuacion2;
     private javax.swing.JComboBox<String> sltEcuacion3;
@@ -836,6 +868,8 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JTextArea textBit;
     private javax.swing.JTextArea textCodificado;
     private javax.swing.JTextArea textMensaje;
+    private javax.swing.JTextArea txtDecodificado;
+    private javax.swing.JTextArea txtEstadosSalidas;
     // End of variables declaration//GEN-END:variables
 
 }
