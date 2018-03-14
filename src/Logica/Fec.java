@@ -216,18 +216,35 @@ public class Fec {
         }
         this.sCodificado = sText;
         if (iAnterior != 0) {
-            this.aListEntrada = new ArrayList<Integer>();
-            ArrayList<Integer> base = new ArrayList<Integer>();
-            base.add(iAnterior);
-            base = this.getCaminoInical(iAnterior, base);
             sText += "~";
-            for (int j = 0; j < this.aListEntrada.size(); j++) {
-                sText += this.sSalidas[this.aListEntrada.get(j)][base.get(j)];
-                this.sCodificado += this.sSalidas[this.aListEntrada.get(j)][base.get(j)];
-                this.sEstadosFinales += "S" + this.sEstadoFinal[this.aListEntrada.get(j)][base.get(j)];
+            this.sEstadosFinales += "~";
+            String sAux2= this.getDevolverse(iAnterior, "");
+            sText += sAux2;
+            if (sAux2 == "") {
+               this.aListEntrada = new ArrayList<Integer>();
+                ArrayList<Integer> base = new ArrayList<Integer>();
+                base.add(iAnterior);
+                base = this.getCaminoInical(iAnterior, base);
+                for (int j = 0; j < this.aListEntrada.size(); j++) {
+                    sText += this.sSalidas[this.aListEntrada.get(j)][base.get(j)];
+                    this.sCodificado += this.sSalidas[this.aListEntrada.get(j)][base.get(j)];
+                    this.sEstadosFinales += "S" + this.sEstadoFinal[this.aListEntrada.get(j)][base.get(j)];
+                } 
             }
         }
         return sText;
+    }
+    
+    public String getDevolverse(int iActual, String Text) {
+        int iAux = this.sEstadoFinal[0][iActual];
+        this.sCodificado += this.sSalidas[0][iActual];
+        Text += this.sSalidas[0][iActual];
+        this.sEstadosFinales += "S" + iAux;
+        if (iAux == 0) {
+            return Text;
+        } else{
+            return this.getDevolverse(iAux, Text);
+        }
     }
     
     public String getsCodificado() {

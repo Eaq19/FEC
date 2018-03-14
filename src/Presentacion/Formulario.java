@@ -559,6 +559,13 @@ public class Formulario extends javax.swing.JFrame {
     }
     
     public String fnConvertirBitText(String recibido) {
+        int iResto = recibido.length() % 8;
+        if (iResto > 0) {
+            for (int i = 0; i < (8-iResto); i++) {
+                recibido += "0"; 
+            }
+        }
+        //recibido += "00";
         String frase = "";//almacena la frase completa
         for (int i = 0; i < recibido.length(); i += 8) {//recorre la frase de 8 en 8
             /*separa la cadena cada 8 digitos con substring*/
@@ -724,13 +731,13 @@ public class Formulario extends javax.swing.JFrame {
     }
     
     private void btnCodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodificarActionPerformed
-        String sBinario = this.fnConvertirTextBit(this.textMensaje.getText());
-        this.textBit.setText(sBinario);
-        this.textCodificado.setText(this.oFec.getCodificar(sBinario));
-        this.txtEstadosSalidas.setText(this.oFec.getEstadosFinales());
-        this.txtDecodificado.setText(this.fnConvertirBitText(this.oFec.getsCodificado()));
-//        String sTexto = this.fnConvertirBitText(sBinario);
-//        System.out.println(sTexto);
+        if (this.textMensaje.getText() != "") {
+            String sBinario = this.fnConvertirTextBit(this.textMensaje.getText());
+            this.textBit.setText(sBinario);
+            this.textCodificado.setText(this.oFec.getCodificar(sBinario));
+            this.txtEstadosSalidas.setText(this.oFec.getEstadosFinales());
+            this.txtDecodificado.setText(this.fnConvertirBitText(this.oFec.getsCodificado()));
+        }
     }//GEN-LAST:event_btnCodificarActionPerformed
 
     private void btnEstadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadosActionPerformed
