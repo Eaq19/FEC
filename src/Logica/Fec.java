@@ -27,6 +27,13 @@ public class Fec {
     private String sCodificado = "";
     private ArrayList<Integer> aListEntrada = new ArrayList<Integer>();
 
+    /**
+     * Constructor
+     * @param iElement
+     * @param iSalidas
+     * @param iXOR
+     * @param aEcuacion 
+     */
     public Fec(int iElement, int iSalidas, int iXOR, String[] aEcuacion) {
         //Variables inicializadas
         this.iElement = iElement;
@@ -36,6 +43,10 @@ public class Fec {
         this.iEstados = (int) pow(2, iElement);
     }
     
+    /**
+     * Funcion que crea la tabla de verdad
+     * @return 
+     */
     public int[][] getTablaVerdad () {
         int[][] iTabla = new int[this.iEstados * 2][1 + (this.iElement * 2) + this.iSalidas];
         int iAux = 0;
@@ -86,6 +97,11 @@ public class Fec {
         return iTabla;
     }
     
+    /**
+     * Funcion que crea los estados de la tabla de verdad
+     * @param iQFinal
+     * @param iTabla 
+     */
     public void getCrearEstados(int[][] iQFinal, int[][] iTabla) {
         this.aEstados = new String[this.iEstados];
         int[] iValor = new int[this.iEstados];
