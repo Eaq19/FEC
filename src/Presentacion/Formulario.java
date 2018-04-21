@@ -7,6 +7,7 @@ package Presentacion;
 
 import Logica.Fec;
 import static java.lang.Math.pow;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -55,24 +56,24 @@ public class Formulario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanelVariables = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        cmbElementosDeMemoria = new javax.swing.JComboBox<>();
+        cmbElementosDeMemoria = new javax.swing.JComboBox<String>();
         jLabel11 = new javax.swing.JLabel();
-        sltXor = new javax.swing.JComboBox<>();
+        sltXor = new javax.swing.JComboBox<String>();
         jLabel3 = new javax.swing.JLabel();
-        sltSalidas = new javax.swing.JComboBox<>();
+        sltSalidas = new javax.swing.JComboBox<String>();
         btnCapturar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jPanelEcuaciones = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        sltEcuacion3 = new javax.swing.JComboBox<>();
+        sltEcuacion3 = new javax.swing.JComboBox<String>();
         btnIngresar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        sltEcuacion1 = new javax.swing.JComboBox<>();
+        sltEcuacion1 = new javax.swing.JComboBox<String>();
         jLabel5 = new javax.swing.JLabel();
-        sltEcuacion4 = new javax.swing.JComboBox<>();
-        sltEcuacion2 = new javax.swing.JComboBox<>();
+        sltEcuacion4 = new javax.swing.JComboBox<String>();
+        sltEcuacion2 = new javax.swing.JComboBox<String>();
         btnGenerarTabla = new javax.swing.JButton();
         jLabelNum = new javax.swing.JLabel();
         btnVerTabla = new javax.swing.JButton();
@@ -96,9 +97,9 @@ public class Formulario extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        sltPalabras = new javax.swing.JComboBox<>();
+        sltPalabras = new javax.swing.JComboBox<String>();
         jLabel13 = new javax.swing.JLabel();
-        sltErroresCant = new javax.swing.JComboBox<>();
+        sltErroresCant = new javax.swing.JComboBox<String>();
         btnCapturarDec = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane9 = new javax.swing.JScrollPane();
@@ -110,7 +111,7 @@ public class Formulario extends javax.swing.JFrame {
         jScrollPane11 = new javax.swing.JScrollPane();
         txtAreaMsgSol = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
-        sltPalabrasCant = new javax.swing.JComboBox<>();
+        sltPalabrasCant = new javax.swing.JComboBox<String>();
         btnReiniciarDec = new javax.swing.JButton();
         btnCapturarSlt = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
@@ -193,7 +194,7 @@ public class Formulario extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 255));
         jLabel2.setText("Seleccione cantidad de elementos de memoria:");
 
-        cmbElementosDeMemoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        cmbElementosDeMemoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
         cmbElementosDeMemoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbElementosDeMemoriaActionPerformed(evt);
@@ -204,7 +205,7 @@ public class Formulario extends javax.swing.JFrame {
         jLabel11.setForeground(new java.awt.Color(0, 0, 255));
         jLabel11.setText("Seleccione cantidad de XOR:");
 
-        sltXor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3" }));
+        sltXor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3" }));
         sltXor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sltXorActionPerformed(evt);
@@ -215,7 +216,7 @@ public class Formulario extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 255));
         jLabel3.setText("Seleccione cantidad de salidas:");
 
-        sltSalidas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        sltSalidas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
 
         btnCapturar.setFont(new java.awt.Font("Comic Sans MS", 1, 11)); // NOI18N
         btnCapturar.setText("Capturar datos");
@@ -283,7 +284,7 @@ public class Formulario extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("XOR");
 
-        sltEcuacion3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3", "Ninguna" }));
+        sltEcuacion3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "E", "D1", "D2", "D3", "Ninguna" }));
         sltEcuacion3.setPreferredSize(new java.awt.Dimension(80, 20));
 
         btnIngresar.setFont(new java.awt.Font("Comic Sans MS", 1, 11)); // NOI18N
@@ -300,15 +301,15 @@ public class Formulario extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("XOR");
 
-        sltEcuacion1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3" }));
+        sltEcuacion1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "E", "D1", "D2", "D3" }));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("XOR");
 
-        sltEcuacion4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3", "Ninguna" }));
+        sltEcuacion4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "E", "D1", "D2", "D3", "Ninguna" }));
         sltEcuacion4.setPreferredSize(new java.awt.Dimension(80, 20));
 
-        sltEcuacion2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "E", "D1", "D2", "D3", "Ninguna" }));
+        sltEcuacion2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "E", "D1", "D2", "D3", "Ninguna" }));
         sltEcuacion2.setPreferredSize(new java.awt.Dimension(80, 20));
         sltEcuacion2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -550,7 +551,7 @@ public class Formulario extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(0, 0, 204));
         jLabel13.setText("Cantidad de errores:");
 
-        sltErroresCant.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        sltErroresCant.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
 
         btnCapturarDec.setFont(new java.awt.Font("Comic Sans MS", 1, 11)); // NOI18N
         btnCapturarDec.setText("Capturar error");
@@ -577,6 +578,11 @@ public class Formulario extends javax.swing.JFrame {
 
         btnDecodificar.setFont(new java.awt.Font("Comic Sans MS", 1, 11)); // NOI18N
         btnDecodificar.setText("Decodificar");
+        btnDecodificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDecodificarActionPerformed(evt);
+            }
+        });
 
         txtAreaMsgSol.setColumns(20);
         txtAreaMsgSol.setRows(5);
@@ -740,8 +746,10 @@ public class Formulario extends javax.swing.JFrame {
 
     private void fnGenerarTabla() {
         int iAux = this.iElementMemoria;
-        DefaultTableModel modelo = new DefaultTableModel(){
-            public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
+        DefaultTableModel modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
         };
         this.tableTVerdad.setModel(modelo);
         // For para imprimir la matriz de prueba
@@ -804,12 +812,12 @@ public class Formulario extends javax.swing.JFrame {
         }
         return charBin;
     }
-    
+
     public String fnConvertirBitText(String recibido) {
         int iResto = recibido.length() % 8;
         if (iResto > 0) {
-            for (int i = 0; i < (8-iResto); i++) {
-                recibido += "0"; 
+            for (int i = 0; i < (8 - iResto); i++) {
+                recibido += "0";
             }
         }
         //recibido += "00";
@@ -856,32 +864,32 @@ public class Formulario extends javax.swing.JFrame {
             this.sltEcuacion4.setEnabled(false);
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
-    
+
     private boolean fnCrearEcuacion() {
         String sText = "";
         if (this.sltEcuacion1.getSelectedItem().toString() != "Ninguna") {
-            if (sText == ""){
+            if (sText == "") {
                 sText += this.sltEcuacion1.getSelectedItem().toString();
             } else {
                 sText += " XOR " + this.sltEcuacion1.getSelectedItem().toString();
             }
         }
         if (this.sltEcuacion2.getSelectedItem().toString() != "Ninguna") {
-            if (sText == ""){
+            if (sText == "") {
                 sText += this.sltEcuacion2.getSelectedItem().toString();
             } else {
                 sText += " XOR " + this.sltEcuacion2.getSelectedItem().toString();
             }
         }
         if (this.sltEcuacion3.getSelectedItem().toString() != "Ninguna") {
-            if (sText == ""){
+            if (sText == "") {
                 sText += this.sltEcuacion3.getSelectedItem().toString();
             } else {
                 sText += " XOR " + this.sltEcuacion3.getSelectedItem().toString();
             }
         }
         if (this.sltEcuacion4.getSelectedItem().toString() != "Ninguna") {
-            if (sText == ""){
+            if (sText == "") {
                 sText += this.sltEcuacion4.getSelectedItem().toString();
             } else {
                 sText += " XOR " + this.sltEcuacion4.getSelectedItem().toString();
@@ -890,7 +898,7 @@ public class Formulario extends javax.swing.JFrame {
         boolean bAux = false;
         aEcuacion[this.iCantEcuaciones] = sText;
         if ((this.iCantEcuaciones + 1) == this.iSalida) {
-            String sXOR =  "XOR";
+            String sXOR = "XOR";
             int iAux = 0;
             for (int i = 0; i < aEcuacion.length; i++) {
                 if (aEcuacion[i].contains(sXOR)) {
@@ -910,7 +918,7 @@ public class Formulario extends javax.swing.JFrame {
         }
         return bAux;
     }
-    
+
     private int fnValidar() {
         int iAux = 0;
         if (this.sltEcuacion1.getSelectedItem().toString() != "Ninguna") {
@@ -927,26 +935,102 @@ public class Formulario extends javax.swing.JFrame {
         }
         return iAux;
     }
-        
+
     private void fnAgregarItems(javax.swing.JComboBox<String> eSelect) {
         eSelect.addItem("Ninguna");
         eSelect.addItem("E");
         for (int i = 0; i < this.iElementMemoria; i++) {
-            eSelect.addItem("D" + (i+1));
+            eSelect.addItem("D" + (i + 1));
         }
     }
-    
+
     private void fnAgregarItemsDec(javax.swing.JComboBox<String> eSelect, int iNumElem) {
         eSelect.removeAllItems();
         for (int i = 0; i < iNumElem; i++) {
-            eSelect.addItem("" + (i+1));
+            eSelect.addItem("" + (i + 1));
         }
     }
+
     
+    
+    // Funcion para decodificar el mensaje 
+    
+    public String decodificarMensaje(String mensaje) {
+
+        ArrayList<String> bits = new ArrayList();
+        String aux = "";
+        String palabraDecodificada = "";
+        int tam = 0;
+        boolean bandera = false;
+        //this.iTabla = this.oFec.getTablaVerdad();
+
+        String[] palabra = mensaje.split("\\~.*");
+        if (sltSalidas.getSelectedItem().equals("1")) {
+            //Tiene una salida
+            for (int i = 0; i < palabra[0].length(); i++) {
+                bits.add(palabra[0].substring(i, i + 1));
+            }
+            tam = this.iTabla[0].length - 1;
+            //System.out.println("tamaño fila: " + tam);
+        } else if (sltSalidas.getSelectedItem().equals("2")) {
+            //Tiene dos salidas
+            for (int i = 0; i < palabra[0].length(); i += 2) {
+                bits.add(palabra[0].substring(i, i + 2));
+            }
+            tam = this.iTabla[0].length - 2;
+            bandera = true;
+//            System.out.println("tamaño fila: " + tam);
+        } else if (sltSalidas.getSelectedItem().equals("3")) {
+            //Tiene tres salidas
+            for (int i = 0; i < palabra[0].length(); i += 3) {
+                bits.add(palabra[0].substring(i, i + 3));
+            }
+            tam = this.iTabla[0].length - 3;
+//            System.out.println("tamaño fila: " + tam);
+        } else {
+            //No tiene salidas
+            System.out.println("Error: No se reconocen las salidas en el sistema");
+        }
+//        for (int i = 0; i < bits.size(); i++) {
+//            System.out.println("Valor: " + bits.get(i).trim());
+//        }
+
+        for (int k = 0; k < bits.size(); k++) {
+            for (int i = 0; i < this.iTabla.length; i++) {
+                aux = "";
+                for (int j = this.iTabla[i].length - 1; j >= tam; j--) {
+                    //System.out.println("Valor de la tabla: " + this.iTabla[i][j]);
+//                    System.out.println("Empiezo en posicion: " + i + "," + j);
+                    aux += String.valueOf(this.iTabla[i][j]);
+                }
+
+//                System.out.println("Todo aux: " + aux);
+                if (aux.equals(bits.get(k).trim())) {
+                    if (bandera) {
+                        palabraDecodificada += iTabla[i][1];
+//                        System.out.println("Bit encontrado: " + iTabla[i][1]);
+//                        System.out.println("Aux: " + aux);
+
+                    } else {
+                        palabraDecodificada += iTabla[i][0];
+//                        System.out.println("Bit encontrado: " + iTabla[i][0]);
+//                        System.out.println("Aux: " + aux);
+
+                    }
+                    i = this.iTabla.length;
+                }
+            }
+        }
+
+        System.out.println("Palabra decodificada: " + palabraDecodificada);
+        return palabraDecodificada;
+    }
+
+
     private void btnVerTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerTablaActionPerformed
         this.fnGenerarTabla();
     }//GEN-LAST:event_btnVerTablaActionPerformed
-    
+
     private void fnReiniciar() {
         this.cmbElementosDeMemoria.setEnabled(true);
         this.sltXor.setEnabled(true);
@@ -997,7 +1081,7 @@ public class Formulario extends javax.swing.JFrame {
         this.jError.setText("");
         this.jError1.setText("");
     }
-    
+
     private void btnCodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodificarActionPerformed
         if (this.textMensaje.getText() != "") {
             this.fnAgregarItemsDec(this.sltPalabrasCant, this.textMensaje.getText().length());
@@ -1015,8 +1099,10 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCodificarActionPerformed
 
     private void btnEstadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadosActionPerformed
-        DefaultTableModel modelo = new DefaultTableModel(){
-            public boolean isCellEditable(int rowIndex,int columnIndex){return false;}
+        DefaultTableModel modelo = new DefaultTableModel() {
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false;
+            }
         };
         this.tableEstados.setModel(modelo);
         int iEstados = (int) pow(2, this.iElementMemoria);
@@ -1071,8 +1157,8 @@ public class Formulario extends javax.swing.JFrame {
     private void btnReiniciarDecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarDecActionPerformed
         this.fnReiniciarDeco();
     }//GEN-LAST:event_btnReiniciarDecActionPerformed
-    
-    private void fnReiniciarDeco () {
+
+    private void fnReiniciarDeco() {
         this.sltPalabras.setEnabled(false);
         this.sltErroresCant.setEnabled(false);
         this.sltPalabrasCant.setSelectedIndex(0);
@@ -1089,7 +1175,7 @@ public class Formulario extends javax.swing.JFrame {
         this.iErrorPalabra = null;
         this.iErrorPosicion = null;
     }
-    
+
     private void btnCapturarSltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarSltActionPerformed
         this.sltPalabras.setEnabled(true);
         this.sltErroresCant.setEnabled(true);
@@ -1112,6 +1198,11 @@ public class Formulario extends javax.swing.JFrame {
             this.btnDecodificar.setEnabled(true);
         }
     }//GEN-LAST:event_btnCapturarDecActionPerformed
+
+    private void btnDecodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecodificarActionPerformed
+      
+        String mensaje = this.decodificarMensaje(this.textCodificado.getText());
+    }//GEN-LAST:event_btnDecodificarActionPerformed
 
     /**
      * @param args the command line arguments
