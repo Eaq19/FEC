@@ -24,8 +24,7 @@ public class Formulario extends javax.swing.JFrame {
     private String[] aEcuacion = null;
     private Fec oFec = null;
     private int iCapturaErrores = 0;
-    private int[] iErrorPalabra = null;
-    private int[] iErrorPosicion = null;
+    private String sTextBitCod = "";
 
     /**
      * Creates new form Formulario
@@ -109,10 +108,8 @@ public class Formulario extends javax.swing.JFrame {
         btnDecodificar = new javax.swing.JButton();
         jScrollPane11 = new javax.swing.JScrollPane();
         txtAreaMsgSol = new javax.swing.JTextArea();
-        jLabel8 = new javax.swing.JLabel();
-        sltPalabrasCant = new javax.swing.JComboBox<>();
         btnReiniciarDec = new javax.swing.JButton();
-        btnCapturarSlt = new javax.swing.JButton();
+        jlblNumErrores = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
 
         JDialogTablaVerdad.setMinimumSize(new java.awt.Dimension(600, 400));
@@ -565,6 +562,8 @@ public class Formulario extends javax.swing.JFrame {
         jLabel14.setText("Mensaje con error");
 
         txtAreaMsgError.setColumns(20);
+        txtAreaMsgError.setFont(new java.awt.Font("Comic Sans MS", 1, 13)); // NOI18N
+        txtAreaMsgError.setForeground(new java.awt.Color(255, 0, 0));
         txtAreaMsgError.setRows(5);
         jScrollPane9.setViewportView(txtAreaMsgError);
 
@@ -572,6 +571,8 @@ public class Formulario extends javax.swing.JFrame {
         btnCorrerDec.setText("Corregir errores");
 
         txtAreaMsgCorre.setColumns(20);
+        txtAreaMsgCorre.setFont(new java.awt.Font("Comic Sans MS", 1, 13)); // NOI18N
+        txtAreaMsgCorre.setForeground(new java.awt.Color(255, 0, 0));
         txtAreaMsgCorre.setRows(5);
         jScrollPane10.setViewportView(txtAreaMsgCorre);
 
@@ -579,12 +580,10 @@ public class Formulario extends javax.swing.JFrame {
         btnDecodificar.setText("Decodificar");
 
         txtAreaMsgSol.setColumns(20);
+        txtAreaMsgSol.setFont(new java.awt.Font("Comic Sans MS", 1, 13)); // NOI18N
+        txtAreaMsgSol.setForeground(new java.awt.Color(255, 0, 0));
         txtAreaMsgSol.setRows(5);
         jScrollPane11.setViewportView(txtAreaMsgSol);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 204));
-        jLabel8.setText("Cantidad de palabras seleccionadas:");
 
         btnReiniciarDec.setFont(new java.awt.Font("Comic Sans MS", 1, 11)); // NOI18N
         btnReiniciarDec.setText("Reiniciar");
@@ -594,13 +593,9 @@ public class Formulario extends javax.swing.JFrame {
             }
         });
 
-        btnCapturarSlt.setFont(new java.awt.Font("Comic Sans MS", 1, 11)); // NOI18N
-        btnCapturarSlt.setText("Seleccionar");
-        btnCapturarSlt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCapturarSltActionPerformed(evt);
-            }
-        });
+        jlblNumErrores.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jlblNumErrores.setForeground(new java.awt.Color(0, 0, 204));
+        jlblNumErrores.setText("Errores # 0");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -612,33 +607,28 @@ public class Formulario extends javax.swing.JFrame {
                     .addComponent(jScrollPane9)
                     .addComponent(jScrollPane10)
                     .addComponent(jScrollPane11)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCorrerDec)
-                            .addComponent(btnDecodificar)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel13)
-                                            .addComponent(jLabel12)
-                                            .addComponent(jLabel14))
-                                        .addGap(107, 107, 107)
-                                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(sltPalabras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(sltErroresCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(sltPalabrasCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(46, 46, 46)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnCorrerDec)
+                        .addComponent(btnDecodificar)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGap(13, 13, 13)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel13)
+                                        .addComponent(jLabel12))
+                                    .addGap(107, 107, 107)
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(sltPalabras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(sltErroresCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(45, 45, 45)
                                     .addComponent(btnCapturarDec)
-                                    .addComponent(btnCapturarSlt))
-                                .addGap(32, 32, 32)
-                                .addComponent(btnReiniciarDec)))
-                        .addGap(0, 194, Short.MAX_VALUE)))
+                                    .addGap(34, 34, 34)
+                                    .addComponent(btnReiniciarDec))
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(jLabel14)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 545, Short.MAX_VALUE)
+                                    .addComponent(jlblNumErrores, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -646,30 +636,24 @@ public class Formulario extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGap(22, 22, 22)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(sltPalabrasCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCapturarSlt))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(sltPalabras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel13)
-                                    .addComponent(sltErroresCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(btnCapturarDec))))
+                            .addComponent(jLabel12)
+                            .addComponent(sltPalabras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(sltErroresCant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jlblNumErrores, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(btnReiniciarDec)))
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCapturarDec)
+                            .addComponent(btnReiniciarDec))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCorrerDec)
@@ -679,7 +663,7 @@ public class Formulario extends javax.swing.JFrame {
                 .addComponent(btnDecodificar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jLabel15.setBackground(new java.awt.Color(0, 0, 0));
@@ -973,7 +957,6 @@ public class Formulario extends javax.swing.JFrame {
         this.btnEstados.setEnabled(false);
         this.txtDecodificado.setEnabled(false);
         this.txtEstadosSalidas.setEnabled(false);
-        this.sltPalabrasCant.setEnabled(false);
         this.sltPalabras.setEnabled(false);
         this.sltErroresCant.setEnabled(false);
         this.txtAreaMsgError.setEnabled(false);
@@ -984,7 +967,6 @@ public class Formulario extends javax.swing.JFrame {
         this.txtAreaMsgSol.setText("");
         this.btnReiniciarDec.setEnabled(false);
         this.btnCapturarDec.setEnabled(false);
-        this.btnCapturarSlt.setEnabled(false);
         this.btnCorrerDec.setEnabled(false);
         this.btnDecodificar.setEnabled(false);
         this.jLabelNum.setText("Ecuacion #1");
@@ -1000,14 +982,16 @@ public class Formulario extends javax.swing.JFrame {
     
     private void btnCodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCodificarActionPerformed
         if (this.textMensaje.getText() != "") {
-            this.fnAgregarItemsDec(this.sltPalabrasCant, this.textMensaje.getText().length());
             this.fnAgregarItemsDec(this.sltPalabras, this.textMensaje.getText().length());
-            this.sltPalabrasCant.setEnabled(true);
+            this.sltPalabras.setEnabled(true);
+            this.sltErroresCant.setEnabled(true);
             this.btnReiniciarDec.setEnabled(true);
-            this.btnCapturarSlt.setEnabled(true);
+            this.btnCapturarDec.setEnabled(true);
             String sBinario = this.fnConvertirTextBit(this.textMensaje.getText());
             this.textBit.setText(sBinario);
             this.textCodificado.setText(this.oFec.getCodificar(sBinario));
+            this.sTextBitCod = this.textCodificado.getText().replace("~","");
+            this.sTextBitCod = this.sTextBitCod.substring(0, this.sTextBitCod.length() - this.iSalida);
             this.txtEstadosSalidas.setText(this.oFec.getEstadosFinales());
             this.txtDecodificado.setText(this.fnConvertirBitText(this.oFec.getsCodificado()));
         }
@@ -1073,43 +1057,59 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReiniciarDecActionPerformed
     
     private void fnReiniciarDeco () {
-        this.sltPalabras.setEnabled(false);
-        this.sltErroresCant.setEnabled(false);
-        this.sltPalabrasCant.setSelectedIndex(0);
+        this.fnAgregarItemsDec(this.sltErroresCant, 3);
+        this.sltPalabras.setEnabled(true);
+        this.sltErroresCant.setEnabled(true);
         this.sltPalabras.setSelectedIndex(0);
         this.sltErroresCant.setSelectedIndex(0);
         this.txtAreaMsgError.setText("");
         this.txtAreaMsgCorre.setText("");
         this.txtAreaMsgSol.setText("");
-        this.btnCapturarDec.setEnabled(false);
+        this.btnCapturarDec.setEnabled(true);
         this.btnCorrerDec.setEnabled(false);
         this.btnDecodificar.setEnabled(false);
-        this.sltPalabrasCant.setEnabled(true);
         this.iCapturaErrores = 0;
-        this.iErrorPalabra = null;
-        this.iErrorPosicion = null;
+        this.sTextBitCod = this.textCodificado.getText().replace("~","");
+        this.sTextBitCod = this.sTextBitCod.substring(0, this.sTextBitCod.length() - this.iSalida);
+        this.jlblNumErrores.setText("Errores #0");
     }
     
-    private void btnCapturarSltActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarSltActionPerformed
-        this.sltPalabras.setEnabled(true);
-        this.sltErroresCant.setEnabled(true);
-        this.btnCapturarDec.setEnabled(true);
-        this.sltPalabrasCant.setEnabled(false);
-        this.iErrorPalabra = new int[Integer.parseInt(this.sltPalabrasCant.getSelectedItem().toString())];
-        this.iErrorPosicion = new int[Integer.parseInt(this.sltPalabrasCant.getSelectedItem().toString())];
-    }//GEN-LAST:event_btnCapturarSltActionPerformed
-
     private void btnCapturarDecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarDecActionPerformed
-        if ((Integer.parseInt(this.sltPalabrasCant.getSelectedItem().toString()) - 1) != this.iCapturaErrores) {
-            this.iErrorPalabra[this.iCapturaErrores] = Integer.parseInt(this.sltPalabras.getSelectedItem().toString());
-            this.iErrorPosicion[this.iCapturaErrores] = Integer.parseInt(this.sltErroresCant.getSelectedItem().toString());
-            this.iCapturaErrores = this.iCapturaErrores + 1;
-        } else {
-            this.sltPalabras.setEnabled(false);
-            this.sltErroresCant.setEnabled(false);
-            this.btnCapturarDec.setEnabled(false);
+        String sAux = "";
+        if (3 != this.iCapturaErrores) {
+            this.iCapturaErrores = this.iCapturaErrores + Integer.parseInt(this.sltErroresCant.getSelectedItem().toString());
+            for (int i = 0; i < Integer.parseInt(this.sltErroresCant.getSelectedItem().toString()); i++) {
+                int iAux = (int) (Math.random() * 8);
+                int iPosicion = ((Integer.parseInt(this.sltPalabras.getSelectedItem().toString()) - 1) * 8) + iAux;
+                if ((iPosicion + 1) > this.sTextBitCod.length()) {
+                    sAux = this.sTextBitCod.substring(iPosicion, this.sTextBitCod.length());
+                } else {
+                    sAux = this.sTextBitCod.substring(iPosicion, iPosicion + 1);
+                }
+                String sModificado = "";
+                if (sAux.equals("0")) {
+                    sAux = "1";
+                } else{
+                    sAux = "0";
+                }
+                if ((iPosicion - 1) < 0) {
+                    this.sTextBitCod = sAux + this.sTextBitCod.substring(1, this.sTextBitCod.length());
+                } else {
+                    this.sTextBitCod = this.sTextBitCod.substring(0, iPosicion) + sAux + this.sTextBitCod.substring(iPosicion + 1, this.sTextBitCod.length());
+                }
+            }
+            this.jlblNumErrores.setText("Errores #" + this.iCapturaErrores);
             this.btnCorrerDec.setEnabled(true);
             this.btnDecodificar.setEnabled(true);
+            this.txtAreaMsgError.setText(this.sTextBitCod);
+            if ((3 - this.iCapturaErrores) > 0) {
+                this.fnAgregarItemsDec(this.sltErroresCant, 3 - this.iCapturaErrores);
+                this.sltErroresCant.setSelectedIndex(0);
+            } else {
+                this.sltPalabras.setEnabled(false);
+                this.sltErroresCant.setEnabled(false);
+                this.btnCapturarDec.setEnabled(false);
+            }
         }
     }//GEN-LAST:event_btnCapturarDecActionPerformed
 
@@ -1153,7 +1153,6 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JTabbedPane JPanelContenedor;
     private javax.swing.JButton btnCapturar;
     private javax.swing.JButton btnCapturarDec;
-    private javax.swing.JButton btnCapturarSlt;
     private javax.swing.JButton btnCodificar;
     private javax.swing.JButton btnCorrerDec;
     private javax.swing.JButton btnDecodificar;
@@ -1180,7 +1179,6 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelNum;
     private javax.swing.JPanel jPanel1;
@@ -1200,13 +1198,13 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JLabel jlblNumErrores;
     private javax.swing.JComboBox<String> sltEcuacion1;
     private javax.swing.JComboBox<String> sltEcuacion2;
     private javax.swing.JComboBox<String> sltEcuacion3;
     private javax.swing.JComboBox<String> sltEcuacion4;
     private javax.swing.JComboBox<String> sltErroresCant;
     private javax.swing.JComboBox<String> sltPalabras;
-    private javax.swing.JComboBox<String> sltPalabrasCant;
     private javax.swing.JComboBox<String> sltSalidas;
     private javax.swing.JComboBox<String> sltXor;
     private javax.swing.JTable tableEstados;

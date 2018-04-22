@@ -5,6 +5,7 @@
  */
 package Logica;
 
+import com.sun.xml.internal.ws.util.StringUtils;
 import static java.lang.Math.pow;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -248,6 +249,10 @@ public class Fec {
                 } 
             }
         }
+        for (int i = 0; i < this.iSalidas; i++) {
+            sText += "0";
+        }
+        this.sEstadosFinales += "S0";
         return sText;
     }
     
