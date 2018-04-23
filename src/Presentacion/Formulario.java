@@ -569,6 +569,11 @@ public class Formulario extends javax.swing.JFrame {
 
         btnCorrerDec.setFont(new java.awt.Font("Comic Sans MS", 1, 11)); // NOI18N
         btnCorrerDec.setText("Corregir errores");
+        btnCorrerDec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCorrerDecActionPerformed(evt);
+            }
+        });
 
         txtAreaMsgCorre.setColumns(20);
         txtAreaMsgCorre.setFont(new java.awt.Font("Comic Sans MS", 1, 13)); // NOI18N
@@ -1101,7 +1106,11 @@ public class Formulario extends javax.swing.JFrame {
             this.jlblNumErrores.setText("Errores #" + this.iCapturaErrores);
             this.btnCorrerDec.setEnabled(true);
             this.btnDecodificar.setEnabled(true);
-            this.txtAreaMsgError.setText(this.sTextBitCod);
+            String sAux2 = this.sTextBitCod;
+            for (int j = 0; j < this.iSalida; j++) {
+                sAux2 += "0";
+            }
+            this.txtAreaMsgError.setText(sAux2);
             if ((3 - this.iCapturaErrores) > 0) {
                 this.fnAgregarItemsDec(this.sltErroresCant, 3 - this.iCapturaErrores);
                 this.sltErroresCant.setSelectedIndex(0);
@@ -1112,6 +1121,10 @@ public class Formulario extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnCapturarDecActionPerformed
+
+    private void btnCorrerDecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorrerDecActionPerformed
+        this.txtAreaMsgCorre.setText(this.oFec.getVitterbi(this.sTextBitCod));
+    }//GEN-LAST:event_btnCorrerDecActionPerformed
 
     /**
      * @param args the command line arguments
