@@ -951,10 +951,7 @@ public class Formulario extends javax.swing.JFrame {
         }
     }
 
-    
-    
     // Funcion para decodificar el mensaje 
-    
     public String decodificarMensaje(String mensaje) {
 
         ArrayList<String> bits = new ArrayList();
@@ -1024,6 +1021,114 @@ public class Formulario extends javax.swing.JFrame {
 
         System.out.println("Palabra decodificada: " + palabraDecodificada);
         return palabraDecodificada;
+    }
+
+    private boolean distanciaLibre() {
+
+        // distancia libre > 2 t donde t es la cantidad de errores
+        int tam = 0;
+        boolean resultado = false;
+        int distanciaLibre1 = 0;
+        int distanciaLibre2 = 0;
+        int distanciaLibre3 = 0;
+
+        if (sltSalidas.getSelectedItem().equals("1")) {
+            //Tiene una salida
+            tam = this.iTabla[0].length - 1;
+            //System.out.println("tamaño fila: " + tam);
+            for (int i = 0; i < this.iTabla.length; i++) {
+                int j = this.iTabla[i].length - 1;
+                //System.out.println("Valor de la tabla: " + this.iTabla[i][j]);
+//                    System.out.println("Empiezo en posicion: " + i + "," + j);
+                if (this.iTabla[i][j] == 1) {
+                    distanciaLibre1++;
+                }
+            }
+
+//            System.out.println("Distancia Libre s1: " + distanciaLibre1);
+            System.out.println("Distancia Libre es : " + distanciaLibre1);
+            if (distanciaLibre1 > (2 * (Integer.parseInt(sltErroresCant.getSelectedItem().toString())))) {
+                resultado = false;
+            } else {
+                resultado = true;
+            }
+
+        } else if (sltSalidas.getSelectedItem().equals("2")) {
+            //Tiene dos salidas
+            tam = this.iTabla[0].length - 2;
+//            System.out.println("tamaño fila: " + tam);
+
+            for (int i = 0; i < this.iTabla.length; i++) {
+                int j = this.iTabla[i].length - 1;
+                //System.out.println("Valor de la tabla: " + this.iTabla[i][j]);
+//                    System.out.println("Empiezo en posicion: " + i + "," + j);
+                if (this.iTabla[i][j] == 1) {
+                    distanciaLibre1++;
+                }
+                if (this.iTabla[i][j - 1] == 1) {
+                    distanciaLibre2++;
+                }
+            }
+
+//            System.out.println("Distancia Libre s1: " + distanciaLibre1);
+//            System.out.println("Distancia Libre s2: " + distanciaLibre2);
+            int distanciamenor = distanciaLibre1;
+            if (distanciaLibre1 > distanciaLibre2) {
+                distanciamenor = distanciaLibre2;
+            }
+            System.out.println("Distancia Libre es : " + distanciamenor);
+            System.out.println("Errores a corregir : " + (2 * (Integer.parseInt(sltErroresCant.getSelectedItem().toString()))));
+            if (distanciamenor > (2 * (Integer.parseInt(sltErroresCant.getSelectedItem().toString())))) {
+                resultado = false;
+            } else {
+                resultado = true;
+            }
+
+        } else if (sltSalidas.getSelectedItem().equals("3")) {
+            //Tiene tres salidas
+            tam = this.iTabla[0].length - 3;
+//            System.out.println("tamaño fila: " + tam);
+
+            for (int i = 0; i < this.iTabla.length; i++) {
+                int j = this.iTabla[i].length - 1;
+                //System.out.println("Valor de la tabla: " + this.iTabla[i][j]);
+//                    System.out.println("Empiezo en posicion: " + i + "," + j);
+                if (this.iTabla[i][j] == 1) {
+                    distanciaLibre1++;
+                }
+                if (this.iTabla[i][j - 1] == 1) {
+                    distanciaLibre2++;
+                }
+                if (this.iTabla[i][j - 2] == 1) {
+                    distanciaLibre3++;
+                }
+
+            }
+
+//            System.out.println("Distancia Libre s1: " + distanciaLibre1);
+//            System.out.println("Distancia Libre s2: " + distanciaLibre2);
+//            System.out.println("Distancia Libre s3: " + distanciaLibre3);
+            int distanciamenor = distanciaLibre1;
+            if (distanciaLibre1 > distanciaLibre2 && distanciaLibre3 > distanciaLibre2) {
+                distanciamenor = distanciaLibre2;
+
+            } else if (distanciaLibre1 > distanciaLibre3 && distanciaLibre2 > distanciaLibre3) {
+
+                distanciamenor = distanciaLibre3;
+            }
+            System.out.println("Distancia Libre es : " + distanciamenor);
+            System.out.println("Errores a corregir : " + (2 * (Integer.parseInt(sltErroresCant.getSelectedItem().toString()))));
+            if (distanciamenor > (2 * (Integer.parseInt(sltErroresCant.getSelectedItem().toString())))) {
+                resultado = false;
+            } else {
+                resultado = true;
+            }
+        } else {
+            //No tiene salidas
+            System.out.println("Error: No se reconocen las salidas en el sistema");
+        }
+
+        return resultado;
     }
 
 
@@ -1186,6 +1291,13 @@ public class Formulario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCapturarSltActionPerformed
 
     private void btnCapturarDecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarDecActionPerformed
+
+        if (distanciaLibre()) {
+            System.out.println("El sistema puede corregir " + sltErroresCant.getSelectedItem() + " errores seleccionados...");
+        } else {
+            System.out.println("El sistema NO puede corregir " + sltErroresCant.getSelectedItem() + " errores...");
+        }
+
         if ((Integer.parseInt(this.sltPalabrasCant.getSelectedItem().toString()) - 1) != this.iCapturaErrores) {
             this.iErrorPalabra[this.iCapturaErrores] = Integer.parseInt(this.sltPalabras.getSelectedItem().toString());
             this.iErrorPosicion[this.iCapturaErrores] = Integer.parseInt(this.sltErroresCant.getSelectedItem().toString());
@@ -1197,10 +1309,12 @@ public class Formulario extends javax.swing.JFrame {
             this.btnCorrerDec.setEnabled(true);
             this.btnDecodificar.setEnabled(true);
         }
+
+
     }//GEN-LAST:event_btnCapturarDecActionPerformed
 
     private void btnDecodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecodificarActionPerformed
-      
+
         String mensaje = this.decodificarMensaje(this.textCodificado.getText());
     }//GEN-LAST:event_btnDecodificarActionPerformed
 
