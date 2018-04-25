@@ -5,7 +5,6 @@
  */
 package Logica;
 
-import com.sun.xml.internal.ws.util.StringUtils;
 import static java.lang.Math.pow;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,6 +26,7 @@ public class Fec {
     private String sEstadosFinales = "";
     private String sCodificado = "";
     private ArrayList<Integer> aListEntrada = new ArrayList<Integer>();
+    private String sDecodificacion = "";
 
     /**
      * Constructor
@@ -353,7 +353,6 @@ public class Fec {
          * Recorrer el diagrama de trellis
          */
         int iAux = 0;
-        System.out.println(sText);
         for (int i = 0; i < iTam; i++) {
             for (int j = 0; j < this.iEstados; j++) {
                 if (iMatPeso[j][i] > -1) {
@@ -418,11 +417,15 @@ public class Fec {
             i = i - 1;
         }
         String sTextCorreccion = "";
+        this.sDecodificacion = "";
+        int iAuxBits = iTam / 8;
         for (int j = 1; j < sCamino.length; j++) {  
             int iAux2 = Integer.parseInt(sMatEstadoPrev[Integer.parseInt(sCamino[j])][j]);
             int iAux3 = Integer.parseInt(sMatEstado[Integer.parseInt(sCamino[j])][j]);
+            this.sDecodificacion += iAux3;
             sTextCorreccion += this.sSalidas[iAux3][iAux2];
         }
+        this.sDecodificacion = this.sDecodificacion.substring(0, iAuxBits * 8);
         for (int j = 0; j < this.iSalidas; j++) {
             sTextCorreccion += "0";
         }
@@ -438,4 +441,9 @@ public class Fec {
         }
         return iAux;
     }
+
+    public String getsDecodificacion() {
+        return sDecodificacion;
+    }
+    
 }
