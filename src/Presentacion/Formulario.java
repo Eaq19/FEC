@@ -979,8 +979,8 @@ public class Formulario extends javax.swing.JFrame {
         String frase = "";//almacena la frase completa
         for (int i = 0; i < recibido.length(); i += 8) {//recorre la frase de 8 en 8
             /*separa la cadena cada 8 digitos con substring*/
- /*entrega un numero decimal a partir de un numero binario de 8 bit*/
- /*concadena la frase y transfroma el decimal a Ascii*/
+            /*entrega un numero decimal a partir de un numero binario de 8 bit*/
+            /*concadena la frase y transfroma el decimal a Ascii*/
             frase += (char) Integer.parseInt(recibido.substring(i, i + 8), 2);
         }
         return frase;
