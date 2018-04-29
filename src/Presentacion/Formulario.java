@@ -837,8 +837,8 @@ public class Formulario extends javax.swing.JFrame {
         int distanciaLibre1 = 0;
         int distanciaLibre2 = 0;
         int distanciaLibre3 = 0;
-
-        if (sltSalidas.getSelectedItem().equals("1")) {
+        int iAux = this.iCapturaErrores + 1;
+        if (iAux == 1) {
             //Tiene una salida
             tam = this.iTabla[0].length - 1;
             //System.out.println("tamaño fila: " + tam);
@@ -853,15 +853,15 @@ public class Formulario extends javax.swing.JFrame {
 
 //            System.out.println("Distancia Libre s1: " + distanciaLibre1);
             //System.out.println("Distancia Libre es : " + distanciaLibre1);
-            if (distanciaLibre1 >= (2 * (Integer.parseInt(sltErroresCant.getSelectedItem().toString())))) {
+            if (distanciaLibre1 >= (2 * (iAux))) {
                 resultado = true;
             } else {
                 resultado = false;
-                JOptionPane.showMessageDialog(null, "NO es posible corregir " + sltErroresCant.getSelectedItem().toString() + " errores en este sistema", "Mensaje de Advertencia", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "NO es posible corregir " + iAux + " errores en este sistema", "Mensaje de Advertencia", JOptionPane.WARNING_MESSAGE);
                 JOptionPane.showMessageDialog(null, "A continuacion un sistema ideal para la cantidad de errores deseados", "Mensaje informativo", JOptionPane.INFORMATION_MESSAGE);
             }
 
-        } else if (sltSalidas.getSelectedItem().equals("2")) {
+        } else if (iAux == 2) {
             //Tiene dos salidas
             tam = this.iTabla[0].length - 2;
 //            System.out.println("tamaño fila: " + tam);
@@ -886,16 +886,16 @@ public class Formulario extends javax.swing.JFrame {
             }
 //            System.out.println("Distancia Libre es : " + distanciamenor);
 //            System.out.println("Errores a corregir : " + (2 * (Integer.parseInt(sltErroresCant.getSelectedItem().toString()))));
-            if (distanciamenor >= (2 * (Integer.parseInt(sltErroresCant.getSelectedItem().toString())))) {
+            if (distanciamenor >= (2 * (iAux))) {
                 resultado = true;
             } else {
                 resultado = false;
-                JOptionPane.showMessageDialog(null, "NO es posible corregir " + sltErroresCant.getSelectedItem().toString() + " errores en este sistema", "Mensaje de Advertencia", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "NO es posible corregir " + iAux + " errores en este sistema", "Mensaje de Advertencia", JOptionPane.WARNING_MESSAGE);
                 JOptionPane.showMessageDialog(null, "A continuacion un sistema ideal para la cantidad de errores deseados", "Mensaje informativo", JOptionPane.INFORMATION_MESSAGE);
 
             }
 
-        } else if (sltSalidas.getSelectedItem().equals("3")) {
+        } else if (iAux == 3) {
             //Tiene tres salidas
             tam = this.iTabla[0].length - 3;
 //            System.out.println("tamaño fila: " + tam);
@@ -929,11 +929,11 @@ public class Formulario extends javax.swing.JFrame {
             }
 //            System.out.println("Distancia Libre es : " + distanciamenor);
 //            System.out.println("Errores a corregir : " + (2 * (Integer.parseInt(sltErroresCant.getSelectedItem().toString()))));
-            if (distanciamenor >= (2 * (Integer.parseInt(sltErroresCant.getSelectedItem().toString())))) {
+            if (distanciamenor >= (2 * (iAux))) {
                 resultado = true;
             } else {
                 resultado = false;
-                JOptionPane.showMessageDialog(null, "NO es posible corregir " + sltErroresCant.getSelectedItem().toString() + " errores en este sistema", "Mensaje de Advertencia", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "NO es posible corregir " + iAux + " errores en este sistema", "Mensaje de Advertencia", JOptionPane.WARNING_MESSAGE);
                 JOptionPane.showMessageDialog(null, "A continuacion un sistema ideal para la cantidad de errores deseados", "Mensaje informativo", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
@@ -941,7 +941,6 @@ public class Formulario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se reconocen las salidas en el sistema ", "Mensaje de Error", JOptionPane.ERROR_MESSAGE);
 
         }
-
         return resultado;
     }
 
@@ -980,8 +979,8 @@ public class Formulario extends javax.swing.JFrame {
         String frase = "";//almacena la frase completa
         for (int i = 0; i < recibido.length(); i += 8) {//recorre la frase de 8 en 8
             /*separa la cadena cada 8 digitos con substring*/
-            /*entrega un numero decimal a partir de un numero binario de 8 bit*/
-            /*concadena la frase y transfroma el decimal a Ascii*/
+ /*entrega un numero decimal a partir de un numero binario de 8 bit*/
+ /*concadena la frase y transfroma el decimal a Ascii*/
             frase += (char) Integer.parseInt(recibido.substring(i, i + 8), 2);
         }
         return frase;
@@ -1260,86 +1259,87 @@ public class Formulario extends javax.swing.JFrame {
     }
 
     private void btnCapturarDecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarDecActionPerformed
-
-        if (distanciaLibre()) {
-            String sAux = "";
-            if (3 != this.iCapturaErrores) {
-                this.iCapturaErrores = this.iCapturaErrores + Integer.parseInt(this.sltErroresCant.getSelectedItem().toString());
-                for (int i = 0; i < Integer.parseInt(this.sltErroresCant.getSelectedItem().toString()); i++) {
-                    int iAux = (int) (Math.random() * 8);
-                    int iPosicion = ((Integer.parseInt(this.sltPalabras.getSelectedItem().toString()) - 1) * 8) + iAux;
-                    if ((iPosicion + 1) > this.sTextBitCod.length()) {
-                        sAux = this.sTextBitCod.substring(iPosicion, this.sTextBitCod.length());
-                    } else {
-                        sAux = this.sTextBitCod.substring(iPosicion, iPosicion + 1);
+        try {
+            if (distanciaLibre()) {
+                String sAux = "";
+                if (3 != this.iCapturaErrores) {
+                    this.iCapturaErrores = this.iCapturaErrores + Integer.parseInt(this.sltErroresCant.getSelectedItem().toString());
+                    for (int i = 0; i < Integer.parseInt(this.sltErroresCant.getSelectedItem().toString()); i++) {
+                        int iAux = (int) (Math.random() * 8);
+                        int iPosicion = ((Integer.parseInt(this.sltPalabras.getSelectedItem().toString()) - 1) * 8) + iAux;
+                        if ((iPosicion + 1) > this.sTextBitCod.length()) {
+                            sAux = this.sTextBitCod.substring(iPosicion, this.sTextBitCod.length());
+                        } else {
+                            sAux = this.sTextBitCod.substring(iPosicion, iPosicion + 1);
+                        }
+                        String sModificado = "";
+                        if (sAux.equals("0")) {
+                            sAux = "1";
+                        } else {
+                            sAux = "0";
+                        }
+                        if ((iPosicion - 1) < 0) {
+                            this.sTextBitCod = sAux + this.sTextBitCod.substring(1, this.sTextBitCod.length());
+                        } else {
+                            this.sTextBitCod = this.sTextBitCod.substring(0, iPosicion) + sAux + this.sTextBitCod.substring(iPosicion + 1, this.sTextBitCod.length());
+                        }
                     }
-                    String sModificado = "";
-                    if (sAux.equals("0")) {
-                        sAux = "1";
-                    } else {
-                        sAux = "0";
+                    this.jlblNumErrores.setText("Errores #" + this.iCapturaErrores);
+                    this.btnCorrerDec.setEnabled(true);
+                    String sAux2 = this.sTextBitCod;
+                    for (int j = 0; j < this.iSalida; j++) {
+                        sAux2 += "0";
                     }
-                    if ((iPosicion - 1) < 0) {
-                        this.sTextBitCod = sAux + this.sTextBitCod.substring(1, this.sTextBitCod.length());
+                    this.txtAreaMsgError.setText(sAux2);
+                    if ((3 - this.iCapturaErrores) > 0) {
+                        this.fnAgregarItemsDec(this.sltErroresCant, 3 - this.iCapturaErrores);
+                        this.sltErroresCant.setSelectedIndex(0);
                     } else {
-                        this.sTextBitCod = this.sTextBitCod.substring(0, iPosicion) + sAux + this.sTextBitCod.substring(iPosicion + 1, this.sTextBitCod.length());
+                        this.sltPalabras.setEnabled(false);
+                        this.sltErroresCant.setEnabled(false);
+                        this.btnCapturarDec.setEnabled(false);
                     }
                 }
-                this.jlblNumErrores.setText("Errores #" + this.iCapturaErrores);
-                this.btnCorrerDec.setEnabled(true);
-                String sAux2 = this.sTextBitCod;
-                for (int j = 0; j < this.iSalida; j++) {
-                    sAux2 += "0";
-                }
-                this.txtAreaMsgError.setText(sAux2);
-                if ((3 - this.iCapturaErrores) > 0) {
-                    this.fnAgregarItemsDec(this.sltErroresCant, 3 - this.iCapturaErrores);
-                    this.sltErroresCant.setSelectedIndex(0);
-                } else {
-                    this.sltPalabras.setEnabled(false);
-                    this.sltErroresCant.setEnabled(false);
-                    this.btnCapturarDec.setEnabled(false);
-                }
-            }
-        } else {
+            } else {
 
 //System.out.println("El sistema NO puede corregir " + sltErroresCant.getSelectedItem() + " errores...");
-            if (sltErroresCant.getSelectedItem().toString().equals("1")) {
-                String mensaje = "Configuración:\n"
-                        + "2 salidas\n"
-                        + "1 elementos de memoria\n"
-                        + "2 XOR\n"
-                        + "\n"
-                        + "Ecuaciones:\n"
-                        + "s1 = E XOR D1 \n"
-                        + "s2= D1 XOR E";
-                this.txtPropuesta.setText(mensaje);
-                this.jDialogPropuesta.show();
-            } else if (sltErroresCant.getSelectedItem().toString().equals("2")) {
-                String mensaje = "Configuración:\n"
-                        + "2 salidas\n"
-                        + "2 elementos de memoria\n"
-                        + "2 XOR\n"
-                        + "\n"
-                        + "Ecuaciones:\n"
-                        + "s1 = E XOR D1 XOR D2\n"
-                        + "s2= E XOR D2";
-                this.txtPropuesta.setText(mensaje);
-                this.jDialogPropuesta.show();
-            } else {
-                String mensaje = "Configuración:\n"
-                        + "2 salidas\n"
-                        + "3 elementos de memoria\n"
-                        + "1 XOR\n"
-                        + "\n"
-                        + "Ecuaciones:\n"
-                        + "s1 = E XOR D1 \n"
-                        + "s2= D2";
-                this.txtPropuesta.setText(mensaje);
-                this.jDialogPropuesta.show();
+                if (sltErroresCant.getSelectedItem().toString().equals("1")) {
+                    String mensaje = "Configuración:\n"
+                            + "2 salidas\n"
+                            + "1 elementos de memoria\n"
+                            + "2 XOR\n"
+                            + "\n"
+                            + "Ecuaciones:\n"
+                            + "s1 = E XOR D1 \n"
+                            + "s2= D1 XOR E";
+                    this.txtPropuesta.setText(mensaje);
+                    this.jDialogPropuesta.show();
+                } else if (sltErroresCant.getSelectedItem().toString().equals("2")) {
+                    String mensaje = "Configuración:\n"
+                            + "2 salidas\n"
+                            + "2 elementos de memoria\n"
+                            + "2 XOR\n"
+                            + "\n"
+                            + "Ecuaciones:\n"
+                            + "s1 = E XOR D1 XOR D2\n"
+                            + "s2= E XOR D2";
+                    this.txtPropuesta.setText(mensaje);
+                    this.jDialogPropuesta.show();
+                } else {
+                    String mensaje = "Configuración:\n"
+                            + "2 salidas\n"
+                            + "3 elementos de memoria\n"
+                            + "1 XOR\n"
+                            + "\n"
+                            + "Ecuaciones:\n"
+                            + "s1 = E XOR D1 \n"
+                            + "s2= D2";
+                    this.txtPropuesta.setText(mensaje);
+                    this.jDialogPropuesta.show();
+                }
             }
+        } catch (Exception e) {
         }
-
     }//GEN-LAST:event_btnCapturarDecActionPerformed
 
     private void btnCorrerDecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCorrerDecActionPerformed
